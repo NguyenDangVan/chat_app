@@ -1,0 +1,24 @@
+# MySQL. Versions 5.0 and up are supported.
+#
+# Install the MySQL driver
+#   gem install mysql2
+#
+# Ensure the MySQL gem is defined in your Gemfile
+default: &default
+  adapter: mysql2
+  encoding: utf8
+  pool: 5
+  database: <%= ENV["CHAT_APP_MANAGEMENT_DATABASE_NAME"] %>
+  username: <%= ENV["CHAT_APP_MANAGEMENT_DATABASE_USERNAME"] %>
+  password: <%= ENV["CHAT_APP_MANAGEMENT_DATABASE_PASSWORD"] %>
+  #socket: /var/run/mysqld/mysqld.sock
+
+development:
+  <<: *default
+
+test:
+  <<: *default
+  database: chat_app_test
+
+production:
+  <<: *default
