@@ -10,6 +10,45 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 0) do
+ActiveRecord::Schema.define(version: 20190107090317) do
 
+  create_table "conversations", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
+    t.integer  "recipent_id"
+    t.integer  "sender_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.index ["recipent_id", "sender_id"], name: "index_conversations_on_recipent_id_and_sender_id", unique: true, using: :btree
+    t.index ["recipent_id"], name: "index_conversations_on_recipent_id", using: :btree
+    t.index ["sender_id"], name: "index_conversations_on_sender_id", using: :btree
+  end
+
+  create_table "messages", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
+    t.text     "content",         limit: 65535
+    t.integer  "user_id"
+    t.integer  "conversation_id"
+    t.datetime "created_at",                    null: false
+    t.datetime "updated_at",                    null: false
+    t.index ["conversation_id"], name: "index_messages_on_conversation_id", using: :btree
+    t.index ["user_id"], name: "index_messages_on_user_id", using: :btree
+  end
+
+  create_table "users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
+    t.string   "name"
+    t.string   "email"
+    t.string   "address"
+    t.string   "avatar"
+    t.string   "password_digest"
+    t.string   "remember_digest"
+    t.integer  "gender",          default: 0
+    t.integer  "role",            default: 0
+    t.date     "birthday"
+    t.integer  "status"
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
+    t.index ["email"], name: "index_users_on_email", using: :btree
+    t.index ["name"], name: "index_users_on_name", using: :btree
+  end
+
+  add_foreign_key "messages", "conversations"
+  add_foreign_key "messages", "users"
 end
