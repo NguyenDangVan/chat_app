@@ -4,11 +4,22 @@
     <title>ChatApp</title>
     <%= csrf_meta_tags %>
 
-    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_link_tag "application", media: "all", "data-turbolinks-track": "reload" %>
+    <%= javascript_include_tag "application", "data-turbolinks-track": "reload" %>
   </head>
-
   <body>
-    <%= yield %>
+    <!-- <div class="col-md-3 left_col">
+      <%#= render "layouts/left_menu" %>
+    </div>
+    <%#= render "layouts/header" %>
+    <div class="right_col" role="main"> -->
+      <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+          <%= render "shared/flash" %>
+        </div>
+      </div>
+      <%= yield %>
+      <%= render "layouts/footer" %>
+    <!-- </div> -->
   </body>
 </html>
