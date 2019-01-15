@@ -2,6 +2,13 @@
   <div class="user-profile">
     <img src="https://instagram-brand.com/wp-content/uploads/2016/11/app-icon2.png"></img>
     Nguyen Dang Van
+    <ul class="main_nav">
+      <% if user_signed_in? %>
+        <li><%= link_to (t".logout"), destroy_user_session_path, method: :delete %></li>
+      <% else %>
+        <%= link_to "Log in", new_user_session_path %>
+      <% end %>
+    </ul>
   </div>
   <div class="content-left">
     <div class="contact-group">

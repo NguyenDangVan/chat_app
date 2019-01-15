@@ -1,5 +1,5 @@
 body {
-  color: white !important;
+  /*color: white !important;*/
 }
 .room-chat {
   width: 100%;
@@ -10,7 +10,7 @@ body {
   width: 20%;
   height: 700px;
   background-color: rgb(29, 29, 29);
-  color: white;
+  color: white !important;
   float: left;
 }
 
@@ -87,6 +87,7 @@ body {
   border: solid 1px gray;
   background: rgb(29, 29, 29) !important;
   width: 80%;
+  color: white;
   height: 700px;
 }
 
