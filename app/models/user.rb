@@ -1,14 +1,7 @@
 class User < ApplicationRecord
-  # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
   has_many :messages
 
-  # VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
-  # validates :name, presence: true #length: {maxmimum: 50}
-  # validates :email, presence: true #lenght: {maximum: 255},
-  #   uniquess: {case_sensitive: false}, format: {with: VALID_EMAIL_REGEX}
-
-  # before_save {email.downcase!}
+  scope :select_by, -> {select :id, :name, :email}
 end
