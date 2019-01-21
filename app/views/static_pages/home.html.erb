@@ -1,20 +1,108 @@
-<% provide :title, "Chat room" %>
-<div class="room-chat">
-  <%= render "layouts/left_menu" %>
-  <div class="right-menu">
-    <div class="title">
-      Name of chat room
+<% provide :title, "Chat App" %>
+<%= render "layouts/left_menu" %>
+
+<!-- Start of Add Friends -->
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="requests">
+      <div class="title">
+        <h1>Add your friends</h1>
+        <button type="button" class="btn" data-dismiss="modal" aria-label="Close"><i class="material-icons">close</i></button>
+      </div>
+      <div class="content">
+        <form>
+          <div class="form-group">
+            <label for="user">Username:</label>
+            <input type="text" class="form-control" id="user" placeholder="Add recipient..." required>
+            <div class="user" id="contact">
+              <%= image_tag("avatars/avatar-female-5.jpg", class: "avatar-sm", alt: "avatar") %>
+              <h5>Keith Morris</h5>
+              <button class="btn"><i class="material-icons">close</i></button>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="welcome">Message:</label>
+            <textarea class="text-control" id="welcome" placeholder="Send your welcome message...">Hi Keith, I'd like to add you as a contact.</textarea>
+          </div>
+          <button type="submit" class="btn button w-100">Send Friend Request</button>
+        </form>
+      </div>
     </div>
-    <div class="content">
-      <h1>Welcome to Bootstrap 4</h1>
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Et,
-         distinctio perspiciatis, fuga minus facilis ea quae qui laborum
-         cupiditate accusamus.
-      </p>
-      <button class="btn btn-primary">Button</button>
+  </div>
+</div>
+<!-- End of Add Friends -->
+<!-- Start of Create Chat -->
+<div class="modal fade" id="startnewchat" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="requests">
+      <div class="title">
+        <h1>Start new chat</h1>
+        <button type="button" class="btn" data-dismiss="modal" aria-label="Close"><i class="material-icons">close</i></button>
+      </div>
+      <div class="content">
+        <form>
+          <div class="form-group">
+            <label for="participant">Recipient:</label>
+            <input type="text" class="form-control" id="participant" placeholder="Add recipient..." required>
+            <div class="user" id="recipient">
+              <%= image_tag("avatars/avatar-female-5.jpg", class: "avatar-sm", alt: "avatar") %>
+              <h5>Keith Morris</h5>
+              <button class="btn"><i class="material-icons">close</i></button>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="topic">Topic:</label>
+            <input type="text" class="form-control" id="topic" placeholder="What's the topic?" required>
+          </div>
+          <div class="form-group">
+            <label for="message">Message:</label>
+            <textarea class="text-control" id="message" placeholder="Send your welcome message...">Hmm, are you friendly?</textarea>
+          </div>
+          <button type="submit" class="btn button w-100">Start New Chat</button>
+        </form>
+      </div>
     </div>
-    <div class="content-input">
-      nhap noi dung
+  </div>
+</div>
+<!-- End of Create Chat -->
+<div class="main">
+  <div class="tab-content" id="nav-tabContent">
+    <!-- Start of Babble -->
+    <div class="babble tab-pane fade active show" id="list-chat" role="tabpanel" aria-labelledby="list-chat-list">
+      <!-- Start of Chat -->
+      <div class="chat" id="chat1">
+        Hello <%= current_user.name %>
+      </div>
+      <!-- End of Chat -->
+      <!-- Start of Call -->
+      <div class="call" id="call1">
+        <div class="content">
+          <div class="container">
+            <div class="col-md-12">
+              <div class="inside">
+                <div class="panel">
+                  <div class="participant">
+                    <%= image_tag("avatars/avatar-female-5.jpg", class: "avatar-xxl", alt: "avatar") %>
+                    <span>Connecting</span>
+                  </div>
+                  <div class="options">
+                    <button class="btn option"><i class="material-icons md-30">mic</i></button>
+                    <button class="btn option"><i class="material-icons md-30">videocam</i></button>
+                    <button class="btn option call-end"><i class="material-icons md-30">call_end</i></button>
+                    <button class="btn option"><i class="material-icons md-30">person_add</i></button>
+                    <button class="btn option"><i class="material-icons md-30">volume_up</i></button>
+                  </div>
+                  <button class="btn back" name="1"><i class="material-icons md-24">chat</i></button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- End of Call -->
     </div>
+    <!-- End of Babble -->
+    <!-- Start of Babble -->
+
   </div>
 </div>
