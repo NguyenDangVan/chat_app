@@ -12,7 +12,7 @@
 
 ActiveRecord::Schema.define(version: 20190114090748) do
 
-  create_table "conversations", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
+  create_table "conversations", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer  "recipent_id"
     t.integer  "sender_id"
     t.datetime "created_at",  null: false
@@ -22,7 +22,7 @@ ActiveRecord::Schema.define(version: 20190114090748) do
     t.index ["sender_id"], name: "index_conversations_on_sender_id", using: :btree
   end
 
-  create_table "messages", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
+  create_table "messages", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.text     "content",         limit: 65535
     t.integer  "user_id"
     t.integer  "conversation_id"
@@ -32,7 +32,7 @@ ActiveRecord::Schema.define(version: 20190114090748) do
     t.index ["user_id"], name: "index_messages_on_user_id", using: :btree
   end
 
-  create_table "users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
+  create_table "users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "name"
     t.string   "address"
     t.string   "avatar"
