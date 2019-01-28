@@ -3,5 +3,6 @@ class StaticPagesController < ApplicationController
 
   def home
     @users = User.select_by
+    @conversations = Conversation.includes(:recipent, :sender)
   end
 end

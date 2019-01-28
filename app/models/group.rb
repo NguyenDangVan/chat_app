@@ -1,4 +1,4 @@
 class Group < ApplicationRecord
-  has_many :chat_rooms
-  has_many :users, through: :chat_rooms
+  has_many :rooms
+  has_many :users, through: :rooms
 end

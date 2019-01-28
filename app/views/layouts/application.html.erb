@@ -8,16 +8,15 @@
     <%= javascript_include_tag "application", "data-turbolinks-track": "reload" %>
   </head>
   <body>
+    <div class="container-fluid global-flash">
+      <%#= render "shared/flash" %>
+    </div>
     <!-- <div class="col-md-3 left_col">
       <%#= render "layouts/left_menu" %>
     </div>
     <%#= render "layouts/header" %>
     <div class="right_col" role="main"> -->
-      <div class="row">
-        <div class="col-md-12 col-sm-12 col-xs-12">
-          <%#= render "shared/flash" %>
-        </div>
-      </div>
+
       <%= yield %>
       <%= render "layouts/footer" %>
     <!-- </div> -->
