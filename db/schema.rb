@@ -13,25 +13,21 @@
 ActiveRecord::Schema.define(version: 20190128015511) do
 
   create_table "blocks", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.integer  "blocked"
-    t.integer  "group_id"
-    t.integer  "user_id"
+    t.integer  "group"
+    t.integer  "blocker_id"
+    t.integer  "blocked_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["group_id"], name: "index_blocks_on_group_id", using: :btree
-    t.index ["user_id"], name: "index_blocks_on_user_id", using: :btree
   end
 
   create_table "conversations", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer  "recipent_id"
     t.integer  "sender_id"
-    t.integer  "user_id"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
     t.index ["recipent_id", "sender_id"], name: "index_conversations_on_recipent_id_and_sender_id", unique: true, using: :btree
     t.index ["recipent_id"], name: "index_conversations_on_recipent_id", using: :btree
     t.index ["sender_id"], name: "index_conversations_on_sender_id", using: :btree
-    t.index ["user_id"], name: "index_conversations_on_user_id", using: :btree
   end
 
   create_table "friendships", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -54,10 +50,12 @@ ActiveRecord::Schema.define(version: 20190128015511) do
     t.text     "content",         limit: 65535
     t.integer  "conversation_id"
     t.integer  "room_id"
+    t.integer  "user_id"
     t.datetime "created_at",                    null: false
     t.datetime "updated_at",                    null: false
     t.index ["conversation_id"], name: "index_messages_on_conversation_id", using: :btree
     t.index ["room_id"], name: "index_messages_on_room_id", using: :btree
+    t.index ["user_id"], name: "index_messages_on_user_id", using: :btree
   end
 
   create_table "rooms", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -91,12 +89,10 @@ ActiveRecord::Schema.define(version: 20190128015511) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   end
 
-  add_foreign_key "blocks", "groups"
-  add_foreign_key "blocks", "users"
-  add_foreign_key "conversations", "users"
   add_foreign_key "friendships", "users"
   add_foreign_key "messages", "conversations"
   add_foreign_key "messages", "rooms"
+  add_foreign_key "messages", "users"
   add_foreign_key "rooms", "groups"
   add_foreign_key "rooms", "users"
 end

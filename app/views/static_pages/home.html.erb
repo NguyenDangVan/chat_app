@@ -1,20 +1,26 @@
 <% provide :title, "Chat App" %>
-<div class="room-chat">
+<link rel='stylesheet prefetch' href='https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css'>
+<div id="frame">
   <%= render "layouts/left_menu" %>
-  <div class="right-menu">
-    <div class="title">
-      Name of chat room
+  <div class="content">
+    <div class="contact-profile">
+      <img src="http://emilcarlsson.se/assets/harveyspecter.png" alt="" />
+      <p>Harvey Specter</p>
+      <div class="social-media">
+        <i class="fa fa-facebook" aria-hidden="true"></i>
+        <i class="fa fa-twitter" aria-hidden="true"></i>
+         <i class="fa fa-instagram" aria-hidden="true"></i>
+      </div>
     </div>
-    <div class="content">
-      <h1>Welcome to Bootstrap 4</h1>
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Et,
-         distinctio perspiciatis, fuga minus facilis ea quae qui laborum
-         cupiditate accusamus.
-      </p>
-      <button class="btn btn-primary">Button</button>
+    <div class="messages">
+      <!-- messages list -->
     </div>
-    <div class="content-input">
-      nhap noi dung
+    <div class="message-input">
+      <div class="wrap">
+      <input type="text" placeholder="Write your message..." />
+      <i class="fa fa-paperclip attachment" aria-hidden="true"></i>
+      <button class="submit"><i class="fa fa-paper-plane" aria-hidden="true"></i></button>
+      </div>
     </div>
   </div>
 </div>

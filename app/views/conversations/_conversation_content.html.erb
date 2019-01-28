@@ -1,0 +1,15 @@
+<% messages.each do |message| %>
+  <ul>
+    <% if conversation && current_user.id = conversation.sender_id %>
+      <li class="sent">
+        <img src="http://emilcarlsson.se/assets/mikeross.png" alt="" />
+        <p><%= message.content %></p>
+      </li>
+    <% elsif conversation %>
+      <li class="replies">
+        <img src="http://emilcarlsson.se/assets/harveyspecter.png" alt="" />
+        <p><%= message.content %></p>
+      </li>
+    <% end %>
+  </ul>
+<% end %>

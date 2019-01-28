@@ -1,22 +1,73 @@
-<div class="left-menu">
+<div id="sidepanel">
+    <div id="profile">
+      <div class="wrap">
+        <img id="profile-img" src="http://emilcarlsson.se/assets/mikeross.png" class="online" alt="" />
+        <p><%= current_user.name %></p>
+        <i class="fa fa-chevron-down expand-button" aria-hidden="true"></i>
+        <div id="status-options">
+          <ul>
+            <li id="status-online" class="active"><span class="status-circle"></span> <p>Online</p></li>
+            <li id="status-away"><span class="status-circle"></span> <p>Away</p></li>
+            <li id="status-busy"><span class="status-circle"></span> <p>Busy</p></li>
+            <li id="status-offline"><span class="status-circle"></span> <p>Offline</p></li>
+          </ul>
+        </div>
+        <div id="expanded">
+          <label for="twitter"><i class="fa fa-facebook fa-fw" aria-hidden="true"></i></label>
+          <input name="twitter" type="text" value="mikeross" />
+          <label for="twitter"><i class="fa fa-twitter fa-fw" aria-hidden="true"></i></label>
+          <input name="twitter" type="text" value="ross81" />
+          <label for="twitter"><i class="fa fa-instagram fa-fw" aria-hidden="true"></i></label>
+          <input name="twitter" type="text" value="mike.ross" />
+        </div>
+      </div>
+    </div>
+    <div id="search">
+      <label for=""><i class="fa fa-search" aria-hidden="true"></i></label>
+      <input type="text" placeholder="Search contacts..." />
+    </div>
+
+
+    <div id="contacts">
+      <ul>
+        <li class="contact active">
+          <div class="wrap">
+            <span class="contact-status online"></span>
+            <img src="http://emilcarlsson.se/assets/louislitt.png" alt="" />
+            <div class="meta">
+              <p class="name">Louis Litt</p>
+              <p class="preview">You just got LITT up, Mike.</p>
+            </div>
+          </div>
+        </li>
+        <%= render "users/contact" %>
+      </ul>
+    </div>
+    <div id="bottom-bar">
+      <button id="addcontact"><i class="fa fa-user-plus fa-fw" aria-hidden="true"></i> <span>Add contact</span></button>
+      <button id="settings"><i class="fa fa-cog fa-fw" aria-hidden="true"></i> <span>Settings</span></button>
+    </div>
+  </div>
+
+<!-- <div class="left-menu">
   <div class="user-profile">
     <div class="profile-img">
-      <% if user_signed_in? %>
+      <%# if user_signed_in? %>
         <img src="https://instagram-brand.com/wp-content/uploads/2016/11/app-icon2.png"></img>
-        <%= current_user.name %>
-      <% else %>
+        <%#= current_user.name %>
+      <%# else %>
 
-      <% end %>
+      <%# end %>
     </div>
     <div class="profile">
       <a href="#" class="dropdown-toggle profile" id="drop4" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-cog"></i></a>
         <ul class="dropdown-menu" id="menu1" aria-labelledby="drop4">
-          <% if user_signed_in? %>
-            <li><%= link_to "Profile", "#" %></li>
-            <li><%= link_to "Log out", destroy_user_session_path, method: :delete %></li>
-          <% else %>
-            <li><%= link_to "Log in", new_user_session_path %></li>
-          <% end %>
+          <%# if user_signed_in? %>
+            <li><%#= link_to "Profile", "#" %></li>
+            <li><%#= link_to "Log out", destroy_user_session_path, method: :delete %></li>
+          <%# else %>
+            <li><%#= link_to "Log in", new_user_session_path %></li>
+          <%# end %>
           <li role="separator" class="divider"></li>
         </ul>
     </div>
@@ -31,7 +82,7 @@
       </div>
     </div>
     <div class="contact-content">
-      <%= render "users/contact" %>
+      <%#= render "users/contact" %>
     </div>
   </div>
   <div class="text-search">
@@ -39,3 +90,4 @@
     <button type="submit" class="btn btn-primary">Search</button>
   </div>
 </div>
+ -->

@@ -1,5 +1,12 @@
 <% @users.each do |user| %>
-  <div class="message">
-    <%= user.name  %>
-  </div>
+  <li class="contact">
+    <div class="wrap">
+      <span class="contact-status online"></span>
+      <img src="http://emilcarlsson.se/assets/louislitt.png" alt="" />
+      <div class="meta">
+        <%= link_to user.name, conversations_path(user_id: user.id), remote: true, method: :post %>
+        <p class="preview">You just got LITT up, Mike.</p>
+      </div>
+    </div>
+  </li>
 <% end %>
