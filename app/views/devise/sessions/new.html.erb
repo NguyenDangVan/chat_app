@@ -1,65 +1,48 @@
-<% provide :title, "Login" %>
-<div class="login-wrap">
-  <div class="login-html">
-    <input id="tab-1" type="radio" name="tab" class="sign-in" checked><label for="tab-1" class="tab">Sign In</label>
-    <input id="tab-2" type="radio" name="tab" class="sign-up"><label for="tab-2" class="tab">Sign Up</label>
-    <div class="login-form">
-      <div class="sign-in-htm">
-        <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-        <div class="group">
-          <label for="user" class="label">Username</label>
-          <%= f.email_field :email, class: "input" %>
-          <!-- <input id="user" type="text" class="input"> -->
-        </div>
-        <div class="group">
-          <label for="pass" class="label">Password</label>
-          <%= f.password_field :password, class: "input", data: {type: "password"} %>
-          <!-- <input id="pass" type="password" class="input" data-type="password"> -->
-        </div>
-        <div class="group">
-          <input id="check" type="checkbox" class="check" checked>
-          <label for="check"><span class="icon"></span> Keep me Signed in</label>
-        </div>
-        <div class="group">
-          <input type="submit" class="button" value="Sign In">
-        </div>
-        <% end %>
-        <div class="hr"></div>
-        <div class="foot-lnk">
-          <a href="#forgot">Forgot Password?</a>
-        </div>
-      </div>
-      <div class="sign-up-htm">
-        <div class="group">
-          <label for="user" class="label">Username</label>
-          <%#= f.text_field :name, {for: "user", class: "input"} %>
-          <!-- <input id="user 2" type="text" class="input"> -->
-        </div>
-        <div class="group">
-          <label for="pass" class="label">Password</label>
-          <%#= f.password_field :password, class: "input", data: {type: "password"} %>
-          <!-- <input id="pass 1" type="password" class="input" data-type="password"> -->
-        </div>
-        <div class="group">
-          <label for="pass" class="label">Repeat Password</label>
-          <%#= f.password_field :password, class: "input", data: {type: "password"} %>
-          <!-- <input id="pass 2 " type="password" class="input" data-type="password"> -->
-        </div>
-        <div class="group">
-          <label for="pass" class="label">Email Address</label>
-          <%#= f.email_field :email, class: "input"%>
-          <!-- <input id="pass 3" type="text" class="input"> -->
-        </div>
-        <div class="group">
-          <%#= f.submit "Sign up", class: "button" %>
-          <!-- <input type="submit" class="button" value="Sign Up"> -->
-        </div>
-        <div class="hr"></div>
-        <div class="foot-lnk">
-          <label for="tab-1">Already Member?</a>
-          <%#= link_to "Already Member?", new_user_session_path %>
+<div class="main order-md-1">
+  <div class="start">
+    <div class="container">
+      <div class="col-md-12">
+        <div class="content">
+          <h1>Sign in to IChat</h1>
+          <div class="third-party">
+            <button class="btn item bg-blue">
+              <i class="material-icons">pages</i>
+            </button>
+            <button class="btn item bg-teal">
+              <i class="material-icons">party_mode</i>
+            </button>
+            <button class="btn item bg-purple">
+              <i class="material-icons">whatshot</i>
+            </button>
+          </div>
+          <p>or use your email account:</p>
+          <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+            <div class="form-group">
+              <%= f.email_field :email, class: "form-control", id: "inputEmail", placeholder: "Emaill Address" %>
+              <button class="btn icon"><i class="material-icons">mail_outline</i></button>
+            </div>
+            <div class="form-group">
+              <%= f.password_field :password, class: "form-control", id: "inputPassword", placeholder: "Password" %>
+              <button class="btn icon"><i class="material-icons">lock_outline</i></button>
+            </div>
+            <%= f.submit "Sign in", class: "btn button" %>
+          <% end %>
         </div>
       </div>
     </div>
   </div>
 </div>
+<!-- End of Sign In -->
+<!-- Start of Sidebar -->
+<div class="aside order-md-2">
+  <div class="container">
+    <div class="col-md-12">
+      <div class="preference">
+        <h2>Hello, Friend!</h2>
+        <p>Enter your personal details and start your journey with Swipe today.</p>
+        <%= link_to "Sign up", new_user_registration_path, class: "btn button" %>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- End of Sidebar -->

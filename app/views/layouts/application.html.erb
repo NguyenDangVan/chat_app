@@ -6,20 +6,14 @@
 
     <%= stylesheet_link_tag "application", media: "all", "data-turbolinks-track": "reload" %>
     <%= javascript_include_tag "application", "data-turbolinks-track": "reload" %>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet">
   </head>
   <body>
-    <!-- <div class="col-md-3 left_col">
-      <%#= render "layouts/left_menu" %>
-    </div>
-    <%#= render "layouts/header" %>
-    <div class="right_col" role="main"> -->
-      <div class="row">
-        <div class="col-md-12 col-sm-12 col-xs-12">
-          <%#= render "shared/flash" %>
-        </div>
+    <main>
+      <div class="layout">
+        <%= yield %>
       </div>
-      <%= yield %>
-      <%= render "layouts/footer" %>
-    <!-- </div> -->
+    </main>
   </body>
 </html>
