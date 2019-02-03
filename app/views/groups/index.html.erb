@@ -1,0 +1,61 @@
+<% provide :title, "Groups" %>
+<div class="sidebar" id="sidebar">
+  <div class="container">
+    <div class="col-md-12">
+      <div class="tab-content">
+        <!-- Start of Discussions -->
+        <div id="discussions" class="tab-pane fade active show">
+          <div class="search">
+            <form class="form-inline position-relative">
+              <input type="search" class="form-control" id="conversations" placeholder="Search for conversations...">
+              <button type="button" class="btn btn-link loop">
+                <i class="material-icons">search</i>
+              </button>
+            </form>
+            <%= link_to new_user_group_path(current_user.id), class: "btn create", remote: true, data: {toggle: "modal", target: "#startnewchat"} do  %>
+              <i class="material-icons">create</i>
+            <% end %>
+            <!-- <button class="btn create" data-toggle="modal" data-target="#startnewchat"><i class="material-icons">create</i></button> -->
+          </div>
+          <div class="list-group sort">
+            <button class="btn filterDiscussionsBtn active show" data-toggle="list" data-filter="all">All</button>
+            <button class="btn filterDiscussionsBtn" data-toggle="list" data-filter="read">Read</button>
+            <button class="btn filterDiscussionsBtn" data-toggle="list" data-filter="unread">Unread</button>
+          </div>
+          <div class="discussions">
+            <h1>Discussions</h1>
+            <div class="list-group" id="chats" role="tablist">
+              <% @groups.each do |group| %>
+              <%#= link_to conversations_path(user_id: user.id), class: "filterDiscussions all unread single", id: "list-chat", data: {toggle: "list"}, method: :post, remote: true, role: "tab" do %>
+              <%= link_to "#", class: "filterDiscussions all unread single", id: "list-chat", data: {toggle: "list"}, method: :post, remote: true, role: "tab" do %>
+                <div class="status">
+                  <i class="material-icons online">fiber_manual_record</i>
+                </div>
+                <%= image_tag("avatars/avatar-male-1.jpg", data: {toogle: "tooltip", placement: "top"}, alt: "avatar", class: "avatar-md", title: "Michael") %>
+                <div class="data">
+                  <h5><%= group.title %></h5>
+                  <span>Mon</span>
+                  <p>Content of Messages</p>
+                </div>
+                <% end %>
+              <% end %>
+            </div>
+          </div>
+        </div>
+        <!-- End of Discussions -->
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="main">
+  <div class="tab-content" id="nav-tabContent">
+    <!-- Start of Babble -->
+    <div class="babble tab-pane fade active show" id="list-chat" role="tabpanel" aria-labelledby="list-chat-list">
+      <!-- Start of Chat -->
+      <div class="chat" id="chat1">
+        Hello <%= current_user.name %>
+      </div>
+    </div>
+  </div>
+</div>
