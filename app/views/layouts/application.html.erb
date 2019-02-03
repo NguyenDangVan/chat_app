@@ -12,6 +12,9 @@
   <body>
     <main>
       <div class="layout">
+        <% if user_signed_in? %>
+        <%= render "layouts/left" %>
+        <% end %>
         <%= yield %>
       </div>
     </main>

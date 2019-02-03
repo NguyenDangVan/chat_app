@@ -1,0 +1,88 @@
+<div class="sidebar" id="sidebar">
+  <div class="container">
+    <div class="col-md-12">
+      <div class="tab-content">
+        <div class="tab-pane fade active show" id="settings">
+          <div class="settings">
+            <div class="profile">
+              <%= image_tag("avatars/avatar-male-1.jpg", class: "avatar-xl", alt: "avatar") %>
+              <h1><%= link_to current_user.name, "#" %></h1>
+              <span><%= current_user.address %></span>
+              <div class="stats">
+                <div class="item">
+                  <h2>122</h2>
+                  <h3>Fellas</h3>
+                </div>
+                <div class="item">
+                  <h2>305</h2>
+                  <h3>Chats</h3>
+                </div>
+                <div class="item">
+                  <h2>1538</h2>
+                  <h3>Posts</h3>
+                </div>
+              </div>
+            </div>
+            <div class="categories" id="accordionSettings">
+              <h1>Settings</h1>
+              <div class="category">
+                <a href="#" class="title collapsed" id="headingOne" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                  <i class="material-icons md-30 online">person_outline</i>
+                  <div class="data">
+                    <h5>My Account</h5>
+                    <p>Update your profile details</p>
+                  </div>
+                  <i class="material-icons">keyboard_arrow_right</i>
+                </a>
+                <div class="collapse" id="collapseOne" aria-labelledby="headingOne" data-parent="#accordionSettings">
+                  <div class="content">
+                    <div class="upload">
+                      <div class="data">
+                        <%= image_tag("avatars/avatar-male-1.jpg", class: "avatar-xl", alt: "image") %>
+                        <label>
+                          <input type="file">
+                          <span class="btn button">Upload avatar</span>
+                        </label>
+                      </div>
+                      <p>For best results, use an image at least 256px by 256px in either .jpg or .png format!</p>
+                    </div>
+
+                    <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+
+                        <div class="field">
+                          <%= f.label :name do %>
+                            Your Name <span>*</span>
+                        <% end %>
+                        <%= f.text_field :name, class: "form-control", id: "firstName", placeholder: "Your name", value: current_user.name %>
+                        </div>
+
+                      <div class="field">
+                        <%= f.label :email do %>
+                            Email <span>*</span>
+                        <% end %>
+                        <%= f.email_field :email, class: "form-control", id: "email", placeholder: "Enter your email address", value: current_user.email %>
+                      </div>
+
+                      <div class="field">
+                        <%= f.label :address do %>
+                            Location <span>*</span>
+                        <% end %>
+                        <%= f.text_field :address, class: "form-control", id: "location", placeholder: "Enter your location", value: current_user.address %>
+                      </div>
+                      <%= f.submit "Apply", class: "btn button w-100" %>
+
+                    <% end %>
+                  </div>
+                </div>
+              </div>
+              <!-- Start of My Account -->
+              <div class="category">
+              </div>
+              <!-- End of My Account -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
