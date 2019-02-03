@@ -1,9 +1,9 @@
-//= require jquery-slim.min
 //= require jquery
 //= require jquery_ujs
-//= require popper.min
+//= require jquery-slim.min
 //= require bootstrap.min
 //= require swipe.min
+//= require popper.min
 
 // (function() {
 //   $(document).on('click', '.toggle-window', function(e) {

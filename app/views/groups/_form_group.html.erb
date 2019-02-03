@@ -1,0 +1,29 @@
+<div class="title">
+  <h1>start new group</h1>
+  <button type="button" class="btn" data-dismiss="modal" aria-label="close"><i class="material-icons">close</i></button>
+</div>
+<div class="content">
+
+  <%= form_for [:user, @group], remote: true do |f | %>
+
+    <%= hidden_field_tag :admin_group, current_user.id %>
+    <div class="form-group">
+      <%= f.label :title do %>
+        title:
+      <% end %>
+      <%= f.text_field :title, class: "form-control", id: "topic", placeholder: "what's the title?" %>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :description do %>
+        description
+      <% end %>
+      <%= f.text_area :description, class: "form-control", id: "message", placeholder: "send your welcome message..." do %>
+        Group for who loves Ruby on Rails
+      <% end %>
+    </div>
+
+    <%= f.submit "Create new group", class: "btn button w-100" %>
+
+  <% end %>
+</div>

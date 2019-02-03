@@ -6,6 +6,7 @@ class User < ApplicationRecord
   has_many :blocks
   has_many :friendship, foreign_key: :user_id, class_name: User
   has_many :rooms
+  has_many :groups, through: :rooms
 
   scope :select_by, -> {select :id, :name, :email}
 
