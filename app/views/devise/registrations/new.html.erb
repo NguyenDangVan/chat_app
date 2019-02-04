@@ -1,3 +1,4 @@
+<% provide :title, "Sign up" %>
 <!-- Start of Sign Up -->
 <div class="main order-md-2">
   <div class="start">
@@ -19,15 +20,21 @@
           <p>or use your email for registration:</p>
           <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
             <div class="form-parent">
+              <div class="form-group">
+                <%= f.text_field :name, class: "form-control", id: "inputName", placeholder: "Username" %>
+                <button class="btn icon"><i class="material-icons">person_outline</i></button>
+              </div>
+              <div class="form-group">
+                <%= f.email_field :email, class: "form-control", id: "inputEmail", placeholder: "Emaill Address" %>
+                <button class="btn icon"><i class="material-icons">mail_outline</i></button>
+              </div>
+            </div>
+
             <div class="form-group">
-              <%= f.text_field :name, class: "form-control", id: "inputName", placeholder: "Username" %>
-              <button class="btn icon"><i class="material-icons">person_outline</i></button>
+              <%= f.text_field :address, class: "form-control", id: "inputAddress", placeholder: "Location" %>
+              <button class="btn icon"><i class="material-icons">info_outline</i></button>
             </div>
-            <div class="form-group">
-              <%= f.email_field :email, class: "form-control", id: "inputEmail", placeholder: "Emaill Address" %>
-              <button class="btn icon"><i class="material-icons">mail_outline</i></button>
-            </div>
-            </div>
+
             <div class="form-group">
               <%= f.password_field :password, class: "form-control", id: "inputPassword", placeholder: "Password" %>
               <button class="btn icon"><i class="material-icons">lock_outline</i></button>

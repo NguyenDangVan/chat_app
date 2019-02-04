@@ -1,6 +1,6 @@
 class ConversationsController < ApplicationController
   def index
-    @users = User.find_friend
+    @users = current_user.find_friend
     @conversations = Conversation.includes(:recipent, :sender)
   end
 
