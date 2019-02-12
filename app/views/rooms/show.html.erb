@@ -1,0 +1,12 @@
+<% provide :title, "Room chat" %>
+<div id="messages" data-room-id="<%= @room.id %>" >
+  <%= render @room.messages %>
+</div>
+<%= form_for @message, url: "#" do |f| %>
+  <div class="form-group">
+    <%= f.label :content %>
+    <%= f.text_area :content, class: 'form-control' %>
+    <%= f.submit "send", class: "form-control" %>
+    <small class="text-muted">From 2 to 1000 characters</small>
+  </div>
+<% end %>

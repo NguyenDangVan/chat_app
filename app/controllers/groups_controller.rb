@@ -12,9 +12,10 @@ class GroupsController < ApplicationController
   end
 
   def create
-    @group = Group.new group_params
+    @group = current_user.groups.build group_params
     if @group.save
-      Room.create user_id: params[:admin_group].to_i, group_id: @group.id
+      @group.rooms.build user_id: params[:admin_group].to_i, group_id: @group.id
+      # Room.create user_id: params[:admin_group].to_i, group_id: @group.id
     else
       root_path
     end
