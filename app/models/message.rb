@@ -1,5 +1,9 @@
 class Message < ApplicationRecord
-  belongs_to :conversation
+  after_create_commit {MessageBroadcastJob.perform_later(self)}
+
   belongs_to :user
-  belongs_to :room
+
+  def timestamp
+    created_at.strftime('%H:%M:%S %d %B %Y')
+  end
 end

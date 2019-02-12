@@ -90,7 +90,17 @@
 <div class="container">
   <div class="col-md-12">
     <div class="bottom">
-      <form class="position-relative w-100">
+      <%= form_for [conversation, conversation.messages.build], html: {class: "position-relative w-100"} do |f| %>
+        <%= f.text_area :content, class: "form-control", placeholder: "Start typing for reply...", rows: "1" %>
+        <button class="btn emoticons"><i class="material-icons">insert_emoticon</i></button>
+        <%= f.submit class: "btn send" %>
+        <button type="submit" class="btn send"><i class="material-icons">send</i></button>
+      <% end %>
+      <label>
+        <input type="file">
+        <span class="btn attach d-sm-block d-none"><i class="material-icons">attach_file</i></span>
+      </label>
+      <!-- <form class="position-relative w-100">
         <textarea class="form-control" placeholder="Start typing for reply..." rows="1"></textarea>
         <button class="btn emoticons"><i class="material-icons">insert_emoticon</i></button>
         <button type="submit" class="btn send"><i class="material-icons">send</i></button>
@@ -98,7 +108,7 @@
       <label>
         <input type="file">
         <span class="btn attach d-sm-block d-none"><i class="material-icons">attach_file</i></span>
-      </label>
+      </label> -->
     </div>
   </div>
 </div>
