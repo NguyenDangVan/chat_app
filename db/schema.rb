@@ -10,63 +10,49 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190128015511) do
+ActiveRecord::Schema.define(version: 20190212062539) do
 
-  create_table "blocks", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.integer  "group"
-    t.integer  "blocker_id"
-    t.integer  "blocked_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+  create_table "message_rooms", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string   "content"
+    t.integer  "user_room_id"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+    t.index ["user_room_id"], name: "index_message_rooms_on_user_room_id", using: :btree
   end
 
-  create_table "conversations", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.integer  "recipent_id"
-    t.integer  "sender_id"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
-    t.index ["recipent_id", "sender_id"], name: "index_conversations_on_recipent_id_and_sender_id", unique: true, using: :btree
-    t.index ["recipent_id"], name: "index_conversations_on_recipent_id", using: :btree
-    t.index ["sender_id"], name: "index_conversations_on_sender_id", using: :btree
-  end
-
-  create_table "friendships", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.integer  "friend_id"
+  create_table "messages", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.text     "content",      limit: 65535
+    t.integer  "recipient_id"
     t.integer  "user_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["user_id"], name: "index_friendships_on_user_id", using: :btree
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
+    t.index ["user_id"], name: "index_messages_on_user_id", using: :btree
   end
 
-  create_table "groups", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.string   "title"
+  create_table "relationships", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.integer  "friend_id"
+    t.string   "status_request"
+    t.integer  "user_id"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+    t.index ["user_id"], name: "index_relationships_on_user_id", using: :btree
+  end
+
+  create_table "rooms", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string   "name"
+    t.integer  "owner_id"
     t.text     "description", limit: 65535
-    t.string   "avatar"
-    t.integer  "admin_group"
     t.datetime "created_at",                null: false
     t.datetime "updated_at",                null: false
   end
 
-  create_table "messages", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.text     "content",         limit: 65535
-    t.integer  "conversation_id"
+  create_table "user_rooms", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.integer  "user_id"
     t.integer  "room_id"
-    t.integer  "user_id"
-    t.datetime "created_at",                    null: false
-    t.datetime "updated_at",                    null: false
-    t.index ["conversation_id"], name: "index_messages_on_conversation_id", using: :btree
-    t.index ["room_id"], name: "index_messages_on_room_id", using: :btree
-    t.index ["user_id"], name: "index_messages_on_user_id", using: :btree
-  end
-
-  create_table "rooms", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.integer  "sender_id"
-    t.integer  "user_id"
-    t.integer  "group_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["group_id"], name: "index_rooms_on_group_id", using: :btree
-    t.index ["user_id"], name: "index_rooms_on_user_id", using: :btree
+    t.index ["room_id"], name: "index_user_rooms_on_room_id", using: :btree
+    t.index ["user_id"], name: "index_user_rooms_on_user_id", using: :btree
   end
 
   create_table "users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -90,10 +76,9 @@ ActiveRecord::Schema.define(version: 20190128015511) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   end
 
-  add_foreign_key "friendships", "users"
-  add_foreign_key "messages", "conversations"
-  add_foreign_key "messages", "rooms"
+  add_foreign_key "message_rooms", "user_rooms"
   add_foreign_key "messages", "users"
-  add_foreign_key "rooms", "groups"
-  add_foreign_key "rooms", "users"
+  add_foreign_key "relationships", "users"
+  add_foreign_key "user_rooms", "rooms"
+  add_foreign_key "user_rooms", "users"
 end

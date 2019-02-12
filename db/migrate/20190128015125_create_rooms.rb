@@ -1,9 +1,9 @@
 class CreateRooms < ActiveRecord::Migration[5.0]
   def change
     create_table :rooms do |t|
-      t.integer :sender_id
-      t.references :user, foreign_key: true
-      t.references :group, foreign_key: true
+      t.string :name
+      t.integer :owner_id
+      t.text :description
 
       t.timestamps
     end
