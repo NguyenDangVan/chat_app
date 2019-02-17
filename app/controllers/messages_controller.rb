@@ -1,16 +1,14 @@
 class MessagesController < ApplicationController
+  def new
+    @message = Message.new
+
+    format_js
+  end
 
   def create
-    @message = current_user.messages.build message_params
-    @message.user_id = current_user.id
-    @message.recipient_id = params[:user_id]
+    @message = current_user.messages.create message_params
 
-
-    # MessageBroadcastob.perform_later(@message)
-
-    # respond_to do |format|
-    #   format.js
-    # end
+    format_js
   end
 
   def show
@@ -18,9 +16,7 @@ class MessagesController < ApplicationController
     @messages = Message.between(current_user.id, @user.id)
     @message = Message.new
 
-    respond_to do |format|
-      format.js
-    end
+    format_js
   end
 
   def index
@@ -30,6 +26,12 @@ class MessagesController < ApplicationController
   private
 
   def message_params
-    params.require(:message).permit :content
+    params.require(:message).permit :content, :user_id, :recipient_id
+  end
+
+  def format_js
+    respond_to do |format|
+      format.js
+    end
   end
 end
