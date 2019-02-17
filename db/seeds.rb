@@ -30,3 +30,24 @@ end
   description = FFaker::Lorem.paragraph
   Room.create! name: name, owner_id: n + 1, description: description
 end
+
+5.times do |n|
+  user_id = n + 1
+  room_id = 1
+  UserRoom.create! room_id: room_id,
+                  user_id: user_id
+end
+
+5.times do |n|
+  user_id = n + 1
+  room_id = 2
+  UserRoom.create! room_id: room_id,
+                  user_id: user_id
+end
+
+
+5.times do |n|
+  user_room_id = 1
+  MessageRoom.create! user_room_id: user_room_id,
+                  content: "Hello #{n}"
+end

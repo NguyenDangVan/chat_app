@@ -1,0 +1,65 @@
+<% provide :title, "Discussions" %>
+<div class="sidebar" id="sidebar">
+  <div class="container">
+    <div class="col-md-12">
+      <div class="tab-content">
+        <!-- Start of Discussions -->
+        <div id="discussions" class="tab-pane fade active show">
+          <div class="search">
+            <form class="form-inline position-relative">
+              <input type="search" class="form-control" id="conversations" placeholder="Search for conversations...">
+              <button type="button" class="btn btn-link loop">
+                <i class="material-icons">search</i>
+              </button>
+            </form>
+            <%= link_to "", class: "btn create", remote: true, data: {toggle: "modal", target: "#startnewchat"} do  %>
+              <i class="material-icons">person_add</i>
+            <% end %>
+          </div>
+          <div class="list-group sort">
+            <button class="btn filterDiscussionsBtn active show" data-toggle="list" data-filter="all">All</button>
+            <button class="btn filterDiscussionsBtn" data-toggle="list" data-filter="read">Online</button>
+            <button class="btn filterDiscussionsBtn" data-toggle="list" data-filter="unread">Offline</button>
+          </div>
+          <div class="discussions">
+            <h1>Contacts</h1>
+            <div class="list-group" id="chats" role="tablist">
+
+              <% @users.each do |user| %>
+                <%= link_to user_message_path(user_id: user.id, id: 1), class: "filterDiscussions all unread single", id: "list-chat", remote: true, role: "tab" do %>
+                  <div class="status">
+                    <i class="material-icons online">fiber_manual_record</i>
+                  </div>
+                  <div class="new bg-pink">
+                    <span>+10</span>
+                  </div>
+                  <%= image_tag("avatars/avatar-male-1.jpg", data: {toogle: "tooltip", placement: "top"}, alt: "avatar", class: "avatar-md", title: "Michael") %>
+                  <div class="data">
+                    <h5><%= user.name %></h5>
+                    <span>Mon</span>
+                    <p>Content of Messages</p>
+                  </div>
+                <% end %>
+              <% end %>
+
+            </div>
+          </div>
+        </div>
+        <!-- End of Discussions -->
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="main">
+  <div class="tab-content" id="nav-tabContent">
+    <!-- Start of Babble -->
+    <div class="babble tab-pane fade active show" id="list-chat" role="tabpanel" aria-labelledby="list-chat-list">
+      <!-- Start of Chat -->
+      <div class="chat" id="chat1">
+        Hello <%= current_user.name %>
+      </div>
+    </div>
+
+  </div>
+</div>
