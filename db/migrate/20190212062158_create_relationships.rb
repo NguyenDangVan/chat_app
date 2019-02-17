@@ -7,5 +7,7 @@ class CreateRelationships < ActiveRecord::Migration[5.0]
 
       t.timestamps
     end
+    add_index :relationships, :friend_id
+    add_index :relationships, [:friend_id, :user_id], unique: true
   end
 end

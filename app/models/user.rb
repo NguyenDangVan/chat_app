@@ -5,6 +5,7 @@ class User < ApplicationRecord
   has_many :user_rooms, dependent: :destroy
   has_many :rooms, through: :user_rooms
   has_many :message_rooms, through: :user_rooms
+  has_many :friends, class_name: "Relationship", foreign_key: :user_id, dependent: :destroy
 
   validates :name,  presence: true, length: { maximum: 50 }
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
@@ -28,11 +29,16 @@ class User < ApplicationRecord
     BCrypt::Password.new(digest).is_password?(token)
   end
 
-  def find_friend
-    user_list = []
-    user_list_id = Conversation.where(sender_id: self.id).pluck :recipent_id
-    user_list = user_list_id.map {|user_id| User.find_by id: user_id}
-    user_list
+  def add_friend
+  end
+
+  def un_friend
+  end
+
+  def list_friends
+    list = self.friends.where(status_request: "Accepted").pluck(:friend_id)
+    list_friends = list.map {|id| User.find_by id: id}
+    list_friends
   end
 
   def message_private

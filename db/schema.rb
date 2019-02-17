@@ -35,6 +35,8 @@ ActiveRecord::Schema.define(version: 20190212062539) do
     t.integer  "user_id"
     t.datetime "created_at",     null: false
     t.datetime "updated_at",     null: false
+    t.index ["friend_id", "user_id"], name: "index_relationships_on_friend_id_and_user_id", unique: true, using: :btree
+    t.index ["friend_id"], name: "index_relationships_on_friend_id", using: :btree
     t.index ["user_id"], name: "index_relationships_on_user_id", using: :btree
   end
 

@@ -7,9 +7,9 @@
           <%= image_tag("avatars/avatar-male-1.jpg", alt: "avatar", class: "avatar-xl") %>
         <% end %>
 
-        <a href="#members" data-toggle="tab">
+        <%= link_to user_relationships_path(current_user.id), id: "show_mess", class: "active" do %>
           <i class="material-icons">account_circle</i>
-        </a>
+        <% end %>
 
         <%= link_to user_messages_path(current_user.id), id: "show_mess", class: "active" do %>
           <i class="material-icons">chat_bubble_outline</i>
