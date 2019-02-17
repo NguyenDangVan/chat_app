@@ -1,23 +1,34 @@
 class RoomsController < ApplicationController
-  def show
-    # @messages = Message.all
-    @room = Room.includes(:messages).find_by id: params[:id]
-    @message = Message.new
+  def new
+    @room = Room.new
+
+    respond_to do |format|
+      format.js
+    end
   end
 
+  def show; end
+
   def create
-    @room = current_user.rooms.build room_params
-    if @room.save
-      flash[:success] = "Room added"
-      redirect_to rooms_path
-    else
-      render :new
+    @room = current_user.rooms.create room_params
+    # if @room_user_room.save
+    #   flash[:success] = "Room added"
+    # else
+    #   render :new
+    # end
+
+    respond_to do |format|
+      format.js
     end
+  end
+
+  def index
+    @rooms = Room.all
   end
 
   private
 
   def room_params
-    params.require(:room).permit :sender_id
+    params.require(:room).permit :name, :description, :owner_id
   end
 end
