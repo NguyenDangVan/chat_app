@@ -7,7 +7,12 @@ class RoomsController < ApplicationController
     end
   end
 
-  def show; end
+  def show
+    @room = Room.find_by id: params[:id]
+
+    @messages = @room.message_rooms
+    @message = MessageRoom.new
+  end
 
   def create
     @room = current_user.rooms.create room_params

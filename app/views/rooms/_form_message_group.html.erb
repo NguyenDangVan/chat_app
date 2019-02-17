@@ -2,34 +2,34 @@
   <div class="container">
     <div class="col-md-12">
       <div class="inside">
-        <%= link_to user_path(@user.id) do %>
-          <%= image_tag("avatars/avatar-female-1.jpg", data: {toogle: "tooltip", placement: "top"}, alt: "avatar", class: "avatar-md", title: "Janette") %>
-        <% end %>
+        <%= image_tag("avatars/avatar-female-1.jpg", data: {toogle: "tooltip", placement: "top"}, alt: "avatar", class: "avatar-md", title: "Janette") %>
         <div class="status">
           <i class="material-icons online">fiber_manual_record</i>
         </div>
         <div class="data">
-          <h5><%= link_to @user.name, user_path(@user.id) %></h5>
+          <h5><%= link_to @room.name, "" %></h5>
           <span>Active now</span>
         </div>
         <button class="btn connect d-md-block d-none" name="1"><i class="material-icons md-30">phone_in_talk</i></button>
         <button class="btn connect d-md-block d-none" name="1"><i class="material-icons md-36">videocam</i></button>
         <button class="btn d-md-block d-none"><i class="material-icons md-30">info</i></button>
         <div class="dropdown">
-          <button class="btn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="material-icons md-30">more_vert</i></button>
+          <button class="btn" data-toggle="dropdown"><i class="material-icons md-30">more_vert</i></button>
           <div class="dropdown-menu dropdown-menu-right">
-            <button class="dropdown-item connect" name="1"><i class="material-icons">phone_in_talk</i>Voice Call</button>
-            <button class="dropdown-item connect" name="1"><i class="material-icons">videocam</i>Video Call</button>
+            <button class="dropdown-item connect" name="1"><i class="material-icons">settings</i>Edit Group</button>
+            <button class="dropdown-item connect" name="1"><i class="material-icons">group_add</i>List Members</button>
             <hr>
-            <button class="dropdown-item"><i class="material-icons">clear</i>Clear History</button>
-            <button class="dropdown-item"><i class="material-icons">block</i>Block Contact</button>
-            <button class="dropdown-item"><i class="material-icons">delete</i>Delete Contact</button>
+            <button class="dropdown-item"><i class="material-icons">power_settings_new</i>Leave Group</button>
+            <% if @room.owner_id == current_user.id %>
+              <button class="dropdown-item"><i class="material-icons">delete</i>Delete Contact</button>
+            <% end %>
           </div>
         </div>
       </div>
     </div>
   </div>
 </div>
+
 <!-- end top chat -->
 <!-- start content messages -->
 
@@ -42,13 +42,13 @@
         <hr>
       </div>
 
-        <div id="messages_private" data-recipient_id="<%= @user.id %>">
-          <% if !@messages.empty? %>
-            <% messages.each do |message| %>
-              <%= render "messages/message", message: message %>
-            <% end %>
-          <% end %>
-        </div>
+      <div id="messages_private">
+
+        <% messages.each do |message| %>
+          <%= render "rooms/message", message: message %>
+        <% end %>
+
+      </div>
 
       <div class="message">
         <%= image_tag("avatars/avatar-female-1.jpg", data: {toogle: "tooltip", placement: "top"}, alt: "avatar", class: "avatar-md", title: "Janette") %>
@@ -70,16 +70,16 @@
 </div>
 <!-- end content -->
 <!-- end foreach -->
-<form>
+<!-- <form>
   <label>Say something:</label><br>
   <input type="text" data-behavior="room_speaker">
 </form>
-
+ -->
 <div class="container">
   <div class="col-md-12">
     <div class="bottom">
-      <%= form_for [current_user, @message], html: {class: "position-relative w-100"}, remote: true do |f| %>
-        <%#= f.text_area :content, class: "form-control", data: {behavior: "room_speaker"}, placeholder: "Start typing for reply...", rows: "1" %>
+      <%= form_for [current_user, @room, @message], html: {class: "position-relative w-100"}, remote: true do |f| %>
+        <%= f.text_area :content, class: "form-control", data: {behavior: "room_speaker"}, placeholder: "Start typing for reply...", rows: "1" %>
         <button class="btn emoticons"><i class="material-icons">insert_emoticon</i></button>
         <%= f.submit class: "btn send" %>
         <button type="submit" class="btn send"><i class="material-icons">send</i></button>
@@ -88,15 +88,6 @@
         <input type="file">
         <span class="btn attach d-sm-block d-none"><i class="material-icons">attach_file</i></span>
       </label>
-      <!-- <form class="position-relative w-100">
-        <textarea class="form-control" placeholder="Start typing for reply..." rows="1"></textarea>
-        <button class="btn emoticons"><i class="material-icons">insert_emoticon</i></button>
-        <button type="submit" class="btn send"><i class="material-icons">send</i></button>
-      </form>
-      <label>
-        <input type="file">
-        <span class="btn attach d-sm-block d-none"><i class="material-icons">attach_file</i></span>
-      </label> -->
     </div>
   </div>
 </div>

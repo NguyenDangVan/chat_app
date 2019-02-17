@@ -1,0 +1,11 @@
+<% check_usser = (message.user_room.user_id == current_user.id) ? 'me': '' %>
+<div class="message <%= check_usser %>">
+  <div class="text-main">
+    <div class="text-group <%= check_usser %>">
+      <div class="text <%= check_usser %>">
+        <p><%= message.content %></p>
+      </div>
+    </div>
+    <span><%= message.created_at.strftime("%I:%M %p") %></span>
+  </div>
+</div>

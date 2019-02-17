@@ -8,7 +8,9 @@ Rails.application.routes.draw do
   get '/signup', to: "users#new"
   resources :users do
     resources :messages
-    resources :rooms
+    resources :rooms do
+      resources :message_rooms, only: :create
+    end
   end
   resources :rooms
 end
