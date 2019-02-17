@@ -11,11 +11,11 @@
           <i class="material-icons">account_circle</i>
         </a>
 
-        <%= link_to conversations_path, class: "active" do %>
+        <%= link_to user_messages_path(current_user.id), class: "active" do %>
           <i class="material-icons">chat_bubble_outline</i>
         <% end %>
 
-        <%= link_to user_groups_path(current_user.id), class: "f-grow1" do %>
+        <%= link_to "#", class: "f-grow1" do %>
           <i class="material-icons">notifications_none</i>
         <% end %>
 
@@ -23,7 +23,7 @@
           <i class="material-icons">settings</i>
         <% end %>
 
-        <%= link_to destroy_user_session_path, method: :delete, class: "btn power" do %>
+        <%= link_to logout_path, method: :delete, class: "btn power" do %>
           <i class="material-icons">power_settings_new</i>
         <% end %>
 

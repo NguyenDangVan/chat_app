@@ -1,23 +1,35 @@
 class MessagesController < ApplicationController
-  # def create
-  #   @conversation = Conversation.includes(:recipent).find(params[:conversation_id])
-  #   @message = @conversation.messages.create message_params
 
-  #   respond_to do |format|
-  #     format.js
-  #   end
-  # end
+  def create
+    @message = current_user.messages.build message_params
+    @message.user_id = current_user.id
+    @message.recipient_id = params[:user_id]
 
-  # def show
-  #   # fix cung hien thi mess voi user_id: 2
-  #   @conversation = Conversation.find_by sender_id: current_user.id
-  #   @messages = @conversation.messages
-  # end
 
-  # private
+    # MessageBroadcastob.perform_later(@message)
 
-  # def message_params
-  #   params.require(:message).permit :content, :user_id, :conversation_id, :room_id
-  # end
+    # respond_to do |format|
+    #   format.js
+    # end
+  end
 
+  def show
+    @user = User.find_by id: params[:user_id]
+    @messages = Message.between(current_user.id, @user.id)
+    @message = Message.new
+
+    respond_to do |format|
+      format.js
+    end
+  end
+
+  def index
+    @mess_from_users = current_user.message_private
+  end
+
+  private
+
+  def message_params
+    params.require(:message).permit :content
+  end
 end

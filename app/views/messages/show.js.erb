@@ -1,0 +1,9 @@
+// $(document).on('click', '#list-chat', '.data-<%= @user.id %>', function(){
+//   $('#list-chat', '.data-<%= @user.id %>').removeClass('active');
+//   $(this).addClass('active');
+// });
+
+var messages_list = $('#chat1');
+
+messages_list.html("<%= j(render 'messages/form_message', messages: @messages) %>");
+messages_list.data('recipient_id', '<%= @user.id %>');

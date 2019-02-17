@@ -1,16 +1,14 @@
 Rails.application.routes.draw do
-
   mount ActionCable.server => '/cable'
+
   root "static_pages#home"
-  #root "conversations#index"
-  devise_for :users, controllers: {sessions: "sessions"}
+  get    '/login',   to: 'sessions#new'
+  post   '/login',   to: 'sessions#create'
+  delete '/logout',  to: 'sessions#destroy'
+  get '/signup', to: "users#new"
   resources :users do
-    resources :groups do
-      resources :rooms
-    end
+    resources :messages
+    resources :rooms
   end
   resources :rooms
-  resources :conversations do
-    resources :messages
-  end
 end
