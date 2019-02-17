@@ -1,0 +1,15 @@
+<div class="profile" style="text-align: center">
+  <%= image_tag("avatars/avatar-male-1.jpg", class: "avatar-xl", alt: "avatar") %>
+  <h1 style="color: black"><%= @user.name %></h1>
+  <span style="color: white"><%= @user.address %></span>
+  <div class="content" >
+    <div class="stats">
+      <div class="item">
+        <%= link_to "Add friend", "#", class: "btn button" %>
+      </div>
+      <div class="item">
+        <%= link_to "Block", "#", class: "btn button" %>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,9 +1,11 @@
 class UsersController < ApplicationController
-  before_action :load_user, except: %i(new create)
+  before_action :load_user, only: %i(show edit update)
   # before_action :correct_user, only: [:update, :edit]
 
   def show
-    @user = User.find(params[:id])
+    respond_to do |format|
+      format.js
+    end
   end
 
   def new
@@ -11,11 +13,10 @@ class UsersController < ApplicationController
   end
 
   def create
-    byebug
     @user = User.new(user_params)
     if @user.save
       log_in @user
-      flash[:success] = "Welcome to the Sample App!"
+      flash[:success] = "Welcome to IChat!"
       redirect_to root_url
     else
       render :new
