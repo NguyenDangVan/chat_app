@@ -12,7 +12,9 @@
                 <i class="material-icons">search</i>
               </button>
             </form>
-            <button class="btn create" data-toggle="modal" data-target="#startnewchat"><i class="material-icons">create</i></button>
+            <%= link_to new_user_message_path(current_user.id), class: "btn create", remote: true, data: {toggle: "modal", target: "#startnewchat"} do  %>
+              <i class="material-icons">create</i>
+            <% end %>
           </div>
           <div class="list-group sort">
             <button class="btn filterDiscussionsBtn active show" data-toggle="list" data-filter="all">All</button>
@@ -23,8 +25,8 @@
             <h1>Discussions</h1>
             <div class="list-group" id="chats" role="tablist">
 
-              <% @users.each do |user| %>
-                <%= link_to conversations_path(user_id: user.id), class: "filterDiscussions all unread single", id: "list-chat", method: :post, remote: true, role: "tab" do %>
+              <% @mess_from_users.each do |user| %>
+                <%= link_to user_message_path(user_id: user.id, id: 1), class: "filterDiscussions all unread single", id: "list-chat", remote: true, role: "tab" do %>
                   <div class="status">
                     <i class="material-icons online">fiber_manual_record</i>
                   </div>

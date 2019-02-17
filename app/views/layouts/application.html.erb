@@ -3,7 +3,7 @@
   <head>
     <title><%= yield(:title) %></title>
     <%= csrf_meta_tags %>
-
+    <%= action_cable_meta_tag %>
     <%= stylesheet_link_tag "application", media: "all", "data-turbolinks-track": "reload" %>
     <%= javascript_include_tag "application", "data-turbolinks-track": "reload" %>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
@@ -12,15 +12,14 @@
   <body>
     <main>
       <div class="layout">
-        <% if user_signed_in? %>
-          <%= render "layouts/left" %>
+        <% if logged_in? %>
+          <%= render "layouts/navigation" %>
 
           <div class="modal fade" id="startnewchat" tabindex="-1" role="dialog" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered" role="document">
               <div class="requests"></div>
             </div>
           </div>
-
         <% end %>
 
         <%= yield %>

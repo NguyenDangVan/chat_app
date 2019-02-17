@@ -1,6 +1,26 @@
 class UsersController < ApplicationController
-  before_action :load_user
+  before_action :load_user, except: %i(new create)
   # before_action :correct_user, only: [:update, :edit]
+
+  def show
+    @user = User.find(params[:id])
+  end
+
+  def new
+    @user = User.new
+  end
+
+  def create
+    byebug
+    @user = User.new(user_params)
+    if @user.save
+      log_in @user
+      flash[:success] = "Welcome to the Sample App!"
+      redirect_to root_url
+    else
+      render :new
+    end
+  end
 
   def edit; end
 
@@ -13,6 +33,7 @@ class UsersController < ApplicationController
     redirect_to root_path
   end
 
+
   private
 
   def load_user
@@ -24,6 +45,6 @@ class UsersController < ApplicationController
   end
 
   def user_params
-    params.require(:user).permit :name, :email, :birthday, :address, :password
+    params.require(:user).permit :name, :email, :birthday, :address, :password, :password_confirmation
   end
 end

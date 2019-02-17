@@ -39,33 +39,12 @@
         <span>Today</span>
         <hr>
       </div>
-      <% messages.each do |message| %>
-      <% if current_user.id == message.user_id %>
-        <div class="message me">
-          <div class="text-main">
-            <div class="text-group me">
-              <div class="text me">
-                <p><%= message.content %></p>
-              </div>
-            </div>
-            <span><%= message.created_at.strftime("%I:%M %p") %></span>
-          </div>
-        </div>
-      <% else %>
-        <div class="message">
-          <%= image_tag("avatars/avatar-female-1.jpg", data: {toogle: "tooltip", placement: "top"}, alt: "avatar", class: "avatar-md", title: "Janette") %>
-          <div class="text-main">
-            <div class="text-group">
-              <div class="text">
-                <p><%= message.content %></p>
-              </div>
-            </div>
-            <span><%= message.created_at.strftime("%I:%M %p") %></span>
-          </div>
-        </div>
-      <% end %>
 
-      <% end %>
+        <div id="messages_private" data-recipient_id="<%= @user.id %>">
+          <% messages.each do |message| %>
+            <%= render "messages/message", message: message %>
+          <% end %>
+        </div>
 
       <div class="message">
         <%= image_tag("avatars/avatar-female-1.jpg", data: {toogle: "tooltip", placement: "top"}, alt: "avatar", class: "avatar-md", title: "Janette") %>
@@ -87,11 +66,16 @@
 </div>
 <!-- end content -->
 <!-- end foreach -->
+<form>
+  <label>Say something:</label><br>
+  <input type="text" data-behavior="room_speaker">
+</form>
+
 <div class="container">
   <div class="col-md-12">
     <div class="bottom">
-      <%= form_for [conversation, conversation.messages.build], html: {class: "position-relative w-100"} do |f| %>
-        <%= f.text_area :content, class: "form-control", placeholder: "Start typing for reply...", rows: "1" %>
+      <%= form_for [current_user, @message], html: {class: "position-relative w-100"}, remote: true do |f| %>
+        <%#= f.text_area :content, class: "form-control", data: {behavior: "room_speaker"}, placeholder: "Start typing for reply...", rows: "1" %>
         <button class="btn emoticons"><i class="material-icons">insert_emoticon</i></button>
         <%= f.submit class: "btn send" %>
         <button type="submit" class="btn send"><i class="material-icons">send</i></button>

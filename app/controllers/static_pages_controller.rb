@@ -1,9 +1,9 @@
 class StaticPagesController < ApplicationController
+  before_action :logged_in_user
 
   def home
-    #@users = current_user.find_friend
     @users = User.all.where.not(id: current_user)
-    #@conversations = Conversation.includes(:recipent, :sender)
+    # friend of current_user
   end
 
   def find_conversation sender_id, recipent_id

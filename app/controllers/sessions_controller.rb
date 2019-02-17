@@ -1,17 +1,21 @@
-class SessionsController < Devise::SessionsController
+class SessionsController < ApplicationController
+
   def new
-    get_pre_login_url
-    super
   end
 
   def create
-    @referer_url = users_path
-    super
+    user = User.find_by(email: params[:session][:email].downcase)
+    if user && user.authenticate(params[:session][:password])
+      log_in user
+      redirect_to root_url
+    else
+      # Create an error message.
+      render 'new'
+    end
   end
 
-  private
-
-  def get_pre_login_url
-    @referer_url = users_path
+  def destroy
+    log_out
+    redirect_to login_path
   end
 end

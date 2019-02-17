@@ -98,7 +98,9 @@
                 <i class="material-icons">search</i>
               </button>
             </form>
-            <button class="btn create" data-toggle="modal" data-target="#startnewchat"><i class="material-icons">create</i></button>
+            <%= link_to new_user_message_path(current_user.id), class: "btn create", remote: true, data: {toggle: "modal", target: "#startnewchat"} do  %>
+              <i class="material-icons">create</i>
+            <% end %>
           </div>
           <div class="list-group sort">
             <button class="btn filterDiscussionsBtn active show" data-toggle="list" data-filter="all">All</button>
@@ -137,17 +139,17 @@
                 </div>
               </a>
               <% @users.each do |user| %>
-              <%= link_to conversations_path(user_id: user.id), class: "filterDiscussions all unread single", id: "list-chat", data: {toggle: "list"}, method: :post, remote: true, role: "tab" do %>
-              <div class="status">
-                <i class="material-icons online">fiber_manual_record</i>
-              </div>
-              <%= image_tag("avatars/avatar-male-1.jpg", data: {toogle: "tooltip", placement: "top"}, alt: "avatar", class: "avatar-md", title: "Michael") %>
-              <div class="data">
-                <h5><%= user.name %></h5>
-                <span>Mon</span>
-                <p>Content of Messages</p>
-              </div>
-              <% end %>
+                <%= link_to user_messages_path(user_id: user.id), class: "filterDiscussions all unread single", id: "list-chat", data: {toggle: "list"}, method: :post, remote: true, role: "tab" do %>
+                  <div class="status">
+                    <i class="material-icons online">fiber_manual_record</i>
+                  </div>
+                  <%= image_tag("avatars/avatar-male-1.jpg", data: {toogle: "tooltip", placement: "top"}, alt: "avatar", class: "avatar-md", title: "Michael") %>
+                  <div class="data">
+                    <h5><%= user.name %></h5>
+                    <span>Mon</span>
+                    <p>Content of Messages</p>
+                  </div>
+                <% end %>
               <% end %>
             </div>
           </div>
@@ -269,7 +271,7 @@
               <h1>Settings</h1>
               <!-- Start of My Account -->
               <div class="category">
-                <%= link_to edit_user_registration_path, class: "title collapse", id: "headingOne", data: {toggle: "collapse", target: "#collapseOne"}, aria: {expend: "true", controls: "collapseOne"} do %>
+                <%= link_to edit_user_path(current_user.id), class: "title collapse", id: "headingOne", data: {toggle: "collapse", target: "#collapseOne"}, aria: {expend: "true", controls: "collapseOne"} do %>
                   <i class="material-icons md-30 online">person_outline</i>
                   <div class="data">
                     <h5>My Account</h5>
