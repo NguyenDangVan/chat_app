@@ -1,0 +1,16 @@
+<% rooms.each do |room| %>
+  <%= link_to "", class: "filterDiscussions all unread single", id: "list-chat", remote: true, role: "tab" do %>
+  <div class="status">
+    <i class="material-icons online">fiber_manual_record</i>
+  </div>
+  <div class="new bg-pink">
+    <span>+10</span>
+  </div>
+  <%= image_tag("avatars/avatar-male-1.jpg", data: {toogle: "tooltip", placement: "top"}, alt: "avatar", class: "avatar-md", title: "Michael") %>
+  <div class="data">
+    <h5><%= room.name %></h5>
+    <span>Mon</span>
+    <p>Content of Messages</p>
+  </div>
+  <% end %>
+<% end %>

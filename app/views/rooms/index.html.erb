@@ -1,4 +1,4 @@
-<% provide :title, "Discussions" %>
+<% provide :title, "Groups" %>
 <div class="sidebar" id="sidebar">
   <div class="container">
     <div class="col-md-12">
@@ -12,35 +12,19 @@
                 <i class="material-icons">search</i>
               </button>
             </form>
-            <%= link_to new_user_message_path(current_user.id), class: "btn create", remote: true, data: {toggle: "modal", target: "#startnewchat"} do  %>
-              <i class="material-icons">create</i>
+            <%= link_to new_user_room_path(current_user.id), class: "btn create", remote: true, data: {toggle: "modal", target: "#startnewchat"} do  %>
+              <i class="material-icons">group_add</i>
             <% end %>
           </div>
           <div class="list-group sort">
             <button class="btn filterDiscussionsBtn active show" data-toggle="list" data-filter="all">All</button>
-            <button class="btn filterDiscussionsBtn" data-toggle="list" data-filter="read">Read</button>
-            <button class="btn filterDiscussionsBtn" data-toggle="list" data-filter="unread">Unread</button>
+            <button class="btn filterDiscussionsBtn" data-toggle="list" data-filter="read">Joined</button>
           </div>
           <div class="discussions">
-            <h1>Discussions</h1>
+            <h1>Groups</h1>
             <div class="list-group" id="chats" role="tablist">
 
-              <% @mess_from_users.each do |user| %>
-                <%= link_to user_message_path(user_id: user.id, id: 1), class: "filterDiscussions all unread single", id: "list-chat", remote: true, role: "tab" do %>
-                  <div class="status">
-                    <i class="material-icons online">fiber_manual_record</i>
-                  </div>
-                  <div class="new bg-pink">
-                    <span>+10</span>
-                  </div>
-                  <%= image_tag("avatars/avatar-male-1.jpg", data: {toogle: "tooltip", placement: "top"}, alt: "avatar", class: "avatar-md", title: "Michael") %>
-                  <div class="data">
-                    <h5><%= user.name %></h5>
-                    <span>Mon</span>
-                    <p>Content of Messages</p>
-                  </div>
-                <% end %>
-              <% end %>
+              <%= render partial: "rooms/list_groups", locals: {rooms: @rooms} %>
 
             </div>
           </div>
@@ -60,6 +44,5 @@
         Hello <%= current_user.name %>
       </div>
     </div>
-
   </div>
 </div>
