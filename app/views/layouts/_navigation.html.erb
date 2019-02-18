@@ -3,23 +3,23 @@
     <div class="inside">
       <div class="nav nav-tab menu">
 
-        <%= link_to root_path, class: "btn" do %>
+        <%= link_to root_path, class: " btn" do %>
           <%= image_tag("avatars/avatar-male-1.jpg", alt: "avatar", class: "avatar-xl") %>
         <% end %>
 
-        <%= link_to user_relationships_path(current_user.id), id: "show_mess", class: "active" do %>
+        <%= link_to user_relationships_path(current_user.id) do %>
           <i class="material-icons">account_circle</i>
         <% end %>
 
-        <%= link_to user_messages_path(current_user.id), id: "show_mess", class: "active" do %>
-          <i class="material-icons">chat_bubble_outline</i>
+        <%= link_to user_messages_path(current_user.id), class: "active" do %>
+          <i class="material-icons active">chat_bubble_outline</i>
         <% end %>
 
         <%= link_to user_rooms_path(current_user.id), class: "f-grow1" do %>
           <i class="material-icons">group</i>
         <% end %>
 
-        <%= link_to edit_user_path(current_user.id) do %>
+        <%= link_to edit_user_path(current_user.id), class: "show" do %>
           <i class="material-icons">settings</i>
         <% end %>
 

@@ -6,10 +6,12 @@
   .title{
     background-color: #c0c0c0 !important
   }
-  .item a{
+  .item{
     float: left;
     margin: 0 8px;
     width: 45%;
-    font-size: 12px;
+    input{
+      font-size: 12px;
+    }
   }
 }

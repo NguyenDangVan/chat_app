@@ -1,0 +1,5 @@
+<% if current_user.is_friend? @user %>
+  <%= render "un_friend" %>
+<% else %>
+  <%= render "add_friend" %>
+<% end %>

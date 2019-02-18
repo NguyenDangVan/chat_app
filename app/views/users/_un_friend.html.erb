@@ -1,0 +1,7 @@
+<div class="item">
+  <%= form_for current_user.relationships.find_by(status_request: "Accepted", friend_id: @user.id), method: :delete, remote: true  do |f| %>
+    <%= f.hidden_field :friend_id, value: @user.id %>
+    <%= f.submit "Unfriend", class: "btn button" %>
+  <% end %>
+</div>
+<%= render "users/block" %>
