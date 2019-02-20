@@ -3,13 +3,8 @@
   <h1 style="color: black"><%= @user.name %></h1>
   <span style="color: white"><%= @user.address %></span>
   <div class="content" >
-    <div class="stats">
-      <div class="item">
-        <%= link_to "Add friend", "#", class: "btn button" %>
-      </div>
-      <div class="item">
-        <%= link_to "Block", "#", class: "btn button" %>
-      </div>
+    <div class="stats" id="form_friend">
+      <%= render "form_friend" if logged_in? %>
     </div>
   </div>
 </div>

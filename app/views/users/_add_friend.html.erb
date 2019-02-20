@@ -1,0 +1,7 @@
+<div class="item">
+  <%= form_for current_user.relationships.build, method: :post, remote: true do |f| %>
+    <div><%= hidden_field_tag :friend_id, @user.id %></div>
+    <%= f.submit "Add friend", class: "btn button" %>
+  <% end %>
+</div>
+<%= render "users/block" %>

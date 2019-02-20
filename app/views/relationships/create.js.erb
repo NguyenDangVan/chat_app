@@ -1,0 +1,6 @@
+<% if !params[:relationship] %>
+  $('#form_friend').html('<%= j render "users/un_friend" %>');
+<% else %>
+  $('#startnewchat').modal('toggle');
+  location.reload();
+<% end %>

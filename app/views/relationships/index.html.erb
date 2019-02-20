@@ -6,13 +6,13 @@
         <!-- Start of Discussions -->
         <div id="discussions" class="tab-pane fade active show">
           <div class="search">
-            <form class="form-inline position-relative">
-              <input type="search" class="form-control" id="conversations" placeholder="Search for conversations...">
-              <button type="button" class="btn btn-link loop">
+            <%= search_form_for @q, class: "form-inline position-relative" do |f| %>
+              <%= f.text_field :name_cont, class: "form-control", id: "conversations", placeholder: "Search for people..." %>
+              <%= f.button :submit, class: "btn btn-link loop" do %>
                 <i class="material-icons">search</i>
-              </button>
-            </form>
-            <%= link_to "", class: "btn create", remote: true, data: {toggle: "modal", target: "#startnewchat"} do  %>
+              <% end %>
+            <% end %>
+            <%= link_to new_relationship_path(), class: "btn create", remote: true, data: {toggle: "modal", target: "#startnewchat"} do  %>
               <i class="material-icons">person_add</i>
             <% end %>
           </div>

@@ -13,5 +13,5 @@ Rails.application.routes.draw do
       resources :message_rooms, only: :create
     end
   end
-  resources :rooms
+  resources :relationships
 end
