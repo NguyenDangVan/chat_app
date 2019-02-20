@@ -26,7 +26,7 @@
             <div class="list-group" id="chats" role="tablist">
 
               <% @mess_from_users.each do |user| %>
-                <%= link_to user_message_path(user_id: user.id, id: 1), class: "filterDiscussions all unread single", id: "list-chat", remote: true, role: "tab" do %>
+                <%= link_to user_message_path(user_id: user.id, id: 1), class: "filterDiscussions all unread single", remote: true, role: "tab" do %>
                   <div class="status">
                     <i class="material-icons online">fiber_manual_record</i>
                   </div>

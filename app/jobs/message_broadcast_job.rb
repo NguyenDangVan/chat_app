@@ -2,22 +2,13 @@ class MessageBroadcastJob < ApplicationJob
   queue_as :default
 
   def perform message
-    #message = Message.new
-    # ActionCable.server.broadcast "room_channel", {
-    #   content: message.content,
-    #   user_id: message.user_id,
-    #   recipient_id: message.recipient_id
-    # }
-    ActionCable.server.broadcast "room_channel", message: render_message(message)
+    ActionCable.server.broadcast "room_channel",
+      message: render_message(message)
   end
 
   private
 
   def render_message message
-    byebug
-    # current_user_id = message.user_id
-    # current_user = User.find_by id: current_user_id
-    # recipient_id = message.recipient_id
     # view = ActionView::Base.new(ActionController::Base.view_paths, {})
     # view.class_eval do
     #   # include any needed helpers (for the view)
@@ -29,6 +20,6 @@ class MessageBroadcastJob < ApplicationJob
     # MessagesController.render partial: 'messages/message', locals: {message: message}
     # renderer = ApplicationController.renderer.new(method: 'get', https: true)
     #ApplicationController.renderer.render(partial: 'messages/message', locals: { message: message })
-    ApplicationController.renderer.render partial: 'messages/message', locals: {message: message}
+    MessagesController.render partial: 'messages/message_job', locals: {message: message}
   end
 end

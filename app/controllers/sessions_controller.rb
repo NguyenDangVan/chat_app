@@ -9,7 +9,6 @@ class SessionsController < ApplicationController
       log_in user
       redirect_to root_url
     else
-      # Create an error message.
       render 'new'
     end
   end
