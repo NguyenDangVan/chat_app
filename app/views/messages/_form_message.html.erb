@@ -30,18 +30,15 @@
     </div>
   </div>
 </div>
-<!-- end top chat -->
-<!-- start content messages -->
 
 <div class="content" id="content">
   <div class="container">
-    <div class="col-md-12">
+    <div class="col-md-12" id="messages">
       <div class="date">
         <hr>
         <span>Today</span>
         <hr>
       </div>
-
         <div id="messages_private" data-recipient_id="<%= @user.id %>">
           <% if !@messages.empty? %>
             <% messages.each do |message| %>
@@ -49,7 +46,6 @@
             <% end %>
           <% end %>
         </div>
-
       <div class="message">
         <%= image_tag("avatars/avatar-female-1.jpg", data: {toogle: "tooltip", placement: "top"}, alt: "avatar", class: "avatar-md", title: "Janette") %>
         <div class="text-main">
@@ -68,35 +64,23 @@
     </div>
   </div>
 </div>
-<!-- end content -->
-<!-- end foreach -->
-<form>
-  <label>Say something:</label><br>
-  <input type="text" data-behavior="room_speaker">
-</form>
 
 <div class="container">
   <div class="col-md-12">
     <div class="bottom">
       <%= form_for [current_user, @message], html: {class: "position-relative w-100"}, remote: true do |f| %>
-        <%#= f.text_area :content, class: "form-control", data: {behavior: "room_speaker"}, placeholder: "Start typing for reply...", rows: "1" %>
-        <button class="btn emoticons"><i class="material-icons">insert_emoticon</i></button>
-        <%= f.submit class: "btn send" %>
-        <button type="submit" class="btn send"><i class="material-icons">send</i></button>
+        <%= f.text_area :content, class: "form-control", data: {behavior: "room_speaker"}, placeholder: "Start typing for reply...", rows: "1" %>
+        <%= f.button class: "btn emoticons" do %>
+          <i class="material-icons">insert_emoticon</i>
+        <% end %>
+        <%= f.button :submit, class: "btn send" do %>
+          <i class="material-icons">send</i>
+        <% end %>
       <% end %>
       <label>
         <input type="file">
         <span class="btn attach d-sm-block d-none"><i class="material-icons">attach_file</i></span>
       </label>
-      <!-- <form class="position-relative w-100">
-        <textarea class="form-control" placeholder="Start typing for reply..." rows="1"></textarea>
-        <button class="btn emoticons"><i class="material-icons">insert_emoticon</i></button>
-        <button type="submit" class="btn send"><i class="material-icons">send</i></button>
-      </form>
-      <label>
-        <input type="file">
-        <span class="btn attach d-sm-block d-none"><i class="material-icons">attach_file</i></span>
-      </label> -->
     </div>
   </div>
 </div>

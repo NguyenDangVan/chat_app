@@ -6,6 +6,7 @@ App.room = App.cable.subscriptions.create "RoomChannel",
   # Called when the subscription has been terminated by the server
 
   received: (data) ->
+    scroll_bottom()
     $('#messages_private').append data['message']
 
   speak: (message, recipient_id) ->
@@ -17,3 +18,6 @@ $(document).on 'keypress', '[data-behavior~=room_speaker]', (event) ->
     App.room.speak event.target.value, recipient_id
     event.target.value = ''
     event.preventDefault()
+
+scroll_bottom = () ->
+  $('#messages_private').scrollTop($('#messages_private').prop("scrollHeight"))

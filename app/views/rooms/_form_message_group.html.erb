@@ -41,15 +41,11 @@
         <span>Today</span>
         <hr>
       </div>
-
       <div id="messages_private">
-
         <% messages.each do |message| %>
           <%= render "rooms/message", message: message %>
         <% end %>
-
       </div>
-
       <div class="message">
         <%= image_tag("avatars/avatar-female-1.jpg", data: {toogle: "tooltip", placement: "top"}, alt: "avatar", class: "avatar-md", title: "Janette") %>
         <div class="text-main">
@@ -68,21 +64,18 @@
     </div>
   </div>
 </div>
-<!-- end content -->
-<!-- end foreach -->
-<!-- <form>
-  <label>Say something:</label><br>
-  <input type="text" data-behavior="room_speaker">
-</form>
- -->
+
 <div class="container">
   <div class="col-md-12">
     <div class="bottom">
       <%= form_for [current_user, @room, @message], html: {class: "position-relative w-100"}, remote: true do |f| %>
         <%= f.text_area :content, class: "form-control", data: {behavior: "room_speaker"}, placeholder: "Start typing for reply...", rows: "1" %>
-        <button class="btn emoticons"><i class="material-icons">insert_emoticon</i></button>
-        <%= f.submit class: "btn send" %>
-        <button type="submit" class="btn send"><i class="material-icons">send</i></button>
+        <%= f.button :submit, class: "btn emoticons" do %>
+          <i class="material-icons">insert_emoticon</i>
+        <% end %>
+        <%= f.button :submit, class: "btn send" do %>
+          <i class="material-icons">send</i>
+        <% end %>
       <% end %>
       <label>
         <input type="file">
