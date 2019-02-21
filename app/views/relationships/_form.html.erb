@@ -3,11 +3,11 @@
   <button type="button" class="btn" data-dismiss="modal" aria-label="close"><i class="material-icons">close</i></button>
 </div>
 <div class="content">
-  <%= form_for  @relationship, method: :post, remote: true do |f | %>
+  <%= form_for [current_user, @relationship], method: :post, remote: true do |f | %>
     <%= f.hidden_field :user_id, value: current_user.id %>
     <div class="form-group">
       <%= f.label :friend_id, "Name" %>
-      <%= f.text_field :friend_id, class: "form-control", id: "topic", placeholder: "what's the name?" %>
+      <%= f.text_field :friend_id, class: "form-control", id: "topic", placeholder: "what's the name?", autocomplete: true %>
     </div>
     <%= f.submit "Send friend request", class: "btn button w-100" %>
   <% end %>

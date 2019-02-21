@@ -1,1 +1,1 @@
-$('#startnewchat .requests').html('<%= j render "users/form" %>')
+$('#startnewchat .requests').html('<%= j render "users/form", locals: {user: @user} %>')
