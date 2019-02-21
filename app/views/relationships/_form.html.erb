@@ -7,8 +7,9 @@
     <%= f.hidden_field :user_id, value: current_user.id %>
     <div class="form-group">
       <%= f.label :friend_id, "Name" %>
-      <%= f.text_field :friend_id, class: "form-control", id: "topic", placeholder: "what's the name?", autocomplete: true %>
+      <%= f.collection_select :friend_id, @users, :id, :name, {promt: :name}, class: "form-control" %>
     </div>
     <%= f.submit "Send friend request", class: "btn button w-100" %>
   <% end %>
 </div>
+s

@@ -4,6 +4,7 @@ class RelationshipsController < ApplicationController
   def new
     @relationship = current_user.relationships.new
     @message = Message.new
+    @users = User.where.not(id: current_user.id)
 
     respond_to do |format|
       format.js
@@ -11,6 +12,7 @@ class RelationshipsController < ApplicationController
   end
 
   def create
+    @user_id = params[:relationship][:user_id]
     @relationship = current_user.relationships.find_by friend_id: params[:relationship][:friend_id]
     @status_request = params[:relationship][:status_request]
     if @relationship

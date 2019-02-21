@@ -1,5 +1,6 @@
 class MessagesController < ApplicationController
   def new
+    @users = User.all
     @message = Message.new
 
     format_js

@@ -1,5 +1,10 @@
-<% if @relationship || @status_request %>
-  $('#form_friend').html('<%= j render "users/un_block" %>');
+<% if !@user_id %>
+  <% if @relationship || @status_request %>
+    $('#form_friend').html('<%= j render "users/un_block" %>');
+  <% else %>
+    $('#form_friend').html('<%= j render "users/close" %>');
+  <% end %>
 <% else %>
-  $('#form_friend').html('<%= j render "users/close" %>');
+  $('#startnewChat').modal('toggle');
+  location.reload();
 <% end %>
