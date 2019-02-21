@@ -1,1 +1,6 @@
-_un_block.html.erb
+<div class="item">
+  <%= form_for current_user.relationships.find_by(friend_id: @user.id), method: :delete, remote: true do |f| %>
+    <%= f.hidden_field :status_request, value: "Block" %>
+    <%= f.submit "Unblock", class: "btn button" %>
+  <% end %>
+</div>

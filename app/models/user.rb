@@ -7,14 +7,16 @@ class User < ApplicationRecord
   has_many :message_rooms, through: :user_rooms
   has_many :relationships, class_name: "Relationship", foreign_key: :user_id, dependent: :destroy
   has_many :friends, -> {where(relationships: {status_request: 1})}, through: :relationships, source: :friend
+  has_many :blocks, -> {where(relationships: {status_request: 2})}, through: :relationships, source: :friend
+  has_many :pendings, -> {where(relationships: {status_request: 0})}, through: :relationships, source: :friend
 
   validates :name,  presence: true, length: { maximum: 50 }
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
   validates :email, presence: true, length: { maximum: 255 },
                     format: { with: VALID_EMAIL_REGEX },
                     uniqueness: { case_sensitive: false }
-  has_secure_password
   validates :password, presence: true, length: { minimum: 6 }
+  has_secure_password
 
   scope :select_by, -> {select :id, :name, :email}
 
@@ -37,16 +39,31 @@ class User < ApplicationRecord
     friends.delete user
   end
 
+  def is_pending? other_user
+    pendings.pluck(:id).include?(other_user.id)
+  end
+
+  def assign_me? user
+
+  end
+
   def is_friend? other_user
     friends.pluck(:id).include?(other_user.id)
   end
 
-  def blocked?
-    # self.relationships.where()
+  def blocked? other_user
+    blocks.pluck(:id).include?(other_user.id)
   end
 
-  def list_friends
-    self.friends
+  def list_friend
+    Relationship.your_friends(self)
+  end
+
+  def all_friends
+    id_friend = Relationship.your_friends(self).pluck(:friend_id).uniq
+    id_user = Relationship.your_friends(self).pluck(:user_id).uniq
+    ids = (id_friend + id_user).uniq
+    list = ids.map {|id| User.find_by id: id}
   end
 
   def message_private

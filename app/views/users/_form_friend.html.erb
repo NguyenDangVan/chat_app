@@ -1,5 +1,13 @@
-<% if current_user.is_friend? @user %>
-  <%= render "un_friend" %>
+<% if current_user.blocked? @user %>
+  <%= render "users/block" %>
 <% else %>
-  <%= render "add_friend" %>
+  <% if current_user.is_pending? @user %>
+    <%= render "close" %>
+  <% else %>
+    <% if current_user.is_friend? @user %>
+      <%= render "un_friend" %>
+    <% else %>
+      <%= render "add_friend" %>
+    <% end %>
+  <% end %>
 <% end %>

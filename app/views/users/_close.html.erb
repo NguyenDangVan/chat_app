@@ -1,0 +1,6 @@
+<div class="item">
+  <%= form_for current_user.relationships.find_by(status_request: "Pending", friend_id: @user.id), method: :delete, remote: true do |f| %>
+    <%= f.submit "Close", class: "btn button" %>
+  <% end %>
+</div>
+<%= render "users/block" %>

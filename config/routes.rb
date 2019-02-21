@@ -7,7 +7,7 @@ Rails.application.routes.draw do
   delete '/logout',  to: 'sessions#destroy'
   get '/signup', to: "users#new"
   resources :users do
-    resources :relationships, only: :index
+    resources :relationships
     resources :messages
     resources :rooms do
       resources :message_rooms, only: :create

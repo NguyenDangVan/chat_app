@@ -2,7 +2,7 @@ class RelationshipsController < ApplicationController
   before_action :logged_in_user
 
   def new
-    @relationship = Relationship.new
+    @relationship = current_user.relationships.new
     @message = Message.new
 
     respond_to do |format|
@@ -11,16 +11,25 @@ class RelationshipsController < ApplicationController
   end
 
   def create
-    if params[:relationship]
-      @user = User.find_by id: params[:relationship][:friend_id]
-      @status = "Pending"
+    @relationship = current_user.relationships.find_by friend_id: params[:relationship][:friend_id]
+    @status_request = params[:relationship][:status_request]
+    if @relationship
+      @user = User.find_by id: @relationship.friend_id
+      @request = @relationship.update_attributes status_request: "Blocked"
     else
-      @user = User.find_by id: params[:friend_id]
-      @status = "Accepted"
+      if @status_request
+        @user = User.find_by id: params[:relationship][:friend_id]
+        @status = "Blocked"
+      else
+        @user = User.find_by id: params[:relationship][:friend_id]
+        @status = "Pending"
+      end
+      @request = current_user.relationships.create! friend_id: @user.id, status_request: @status
     end
-    @request = current_user.relationships.create! friend_id: @user.id, status_request: @status
 
-    flash.now[:success] = "Send friend request successfully" if @request
+    if !@request
+      redirect_to root_path
+    end
 
     respond_to do |format|
       format.js
@@ -28,7 +37,9 @@ class RelationshipsController < ApplicationController
   end
 
   def destroy
+    @relationship = Relationship.find_by(id: params[:id])
     @user = Relationship.find_by(id: params[:id]).friend
+
     current_user.un_friend @user
 
     respond_to do |format|
@@ -40,7 +51,7 @@ class RelationshipsController < ApplicationController
   end
 
   def index
-    @users = current_user.list_friends
+    @users = current_user.all_friends
     @q = User.search params[:q]
     @user = @q.result distinct: true
   end
