@@ -2,12 +2,14 @@
   <div class="container">
     <div class="col-md-12">
       <div class="inside">
-        <%= image_tag("avatars/avatar-female-1.jpg", data: {toogle: "tooltip", placement: "top"}, alt: "avatar", class: "avatar-md", title: "Janette") %>
+        <%= link_to edit_user_room_path(current_user.id, @room.id), data: {toggle: "modal", target: "#startnewchat"}, remote: true do %>
+          <%= image_tag("avatars/avatar-female-1.jpg", data: {toogle: "tooltip", placement: "top"}, alt: "avatar", class: "avatar-md", title: "Janette") %>
+        <% end %>
         <div class="status">
           <i class="material-icons online">fiber_manual_record</i>
         </div>
         <div class="data">
-          <h5><%= link_to @room.name, "" %></h5>
+          <h5><%= link_to @room.name, edit_user_room_path(current_user.id, @room.id), data: {toggle: "modal", target: "#startnewchat"}, remote: true %></h5>
           <span>Active now</span>
         </div>
         <button class="btn connect d-md-block d-none" name="1"><i class="material-icons md-30">phone_in_talk</i></button>
@@ -16,7 +18,9 @@
         <div class="dropdown">
           <button class="btn" data-toggle="dropdown"><i class="material-icons md-30">more_vert</i></button>
           <div class="dropdown-menu dropdown-menu-right">
-            <button class="dropdown-item connect" name="1"><i class="material-icons">settings</i>Edit Group</button>
+            <%= link_to edit_user_room_path(current_user.id, @room.id), class: "dropdown-item connect", data: {toggle: "modal", target: "#startnewchat"}, remote: true do %>
+              <i class="material-icons">settings</i>Edit Group
+            <% end %>
             <button class="dropdown-item connect" name="1"><i class="material-icons">group_add</i>List Members</button>
             <hr>
             <button class="dropdown-item"><i class="material-icons">power_settings_new</i>Leave Group</button>

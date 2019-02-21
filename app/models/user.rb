@@ -48,18 +48,28 @@ class User < ApplicationRecord
   end
 
   def is_friend? other_user
-    friends.pluck(:id).include?(other_user.id)
+    list_friends_of_current_user.pluck(:id).include?(other_user.id)
+  end
+
+  def not_friend
+    ids = User.all.pluck(:id) - self.list_friends_of_current_user.pluck(:id)
+    list = ids.map {|id| User.find_by id: id}
   end
 
   def blocked? other_user
     blocks.pluck(:id).include?(other_user.id)
   end
 
-  def list_friend
+  def list_relationships
     Relationship.your_friends(self)
   end
 
-  def all_friends
+  # def list_friend_with_current
+  #   id_user = Relationship.your_friends(self).pluck(:user_id).uniq
+  #   list = id_user.map {|id| User.find_by id: id}
+  # end
+
+  def list_friends_of_current_user
     id_friend = Relationship.your_friends(self).pluck(:friend_id).uniq
     id_user = Relationship.your_friends(self).pluck(:user_id).uniq
     ids = (id_friend + id_user).uniq

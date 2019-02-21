@@ -1,0 +1,20 @@
+<div class="title">
+  <h1>Edit group</h1>
+  <button type="button" class="btn" data-dismiss="modal" aria-label="close"><i class="material-icons">close</i></button>
+</div>
+<div class="content">
+  <%= form_for [current_user, @room], remote: true do |f | %>
+    <%= render "shared/error", object: f.object %>
+    <div class="form-group">
+      <%= f.label :name %>
+      <%= f.text_field :name, class: "form-control", id: "topic", value: @room.name %>
+    </div>
+    <div class="form-group">
+      <%= f.label :description do %>
+        description
+      <% end %>
+      <%= f.text_area :description, class: "text-control", id: "message", value: @room.description %>
+    </div>
+    <%= f.submit "Update group", class: "btn button w-100" %>
+  <% end %>
+</div>

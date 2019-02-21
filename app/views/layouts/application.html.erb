@@ -11,6 +11,7 @@
   </head>
   <body>
     <main>
+      <%= render "shared/flash" %>
       <div class="layout">
         <% if logged_in? %>
           <%= render "layouts/navigation" %>
@@ -20,9 +21,6 @@
               <div class="requests"></div>
             </div>
           </div>
-        <% end %>
-        <% flash.each do |message_type, message| %>
-          <div class="alert alert-<%= message_type %>"><%= message %></div>
         <% end %>
         <%= yield %>
       </div>
