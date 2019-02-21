@@ -1,4 +1,6 @@
 class RoomsController < ApplicationController
+  before_action :logged_in_user
+
   def new
     @room = Room.new
 
@@ -16,14 +18,35 @@ class RoomsController < ApplicationController
 
   def create
     @room = current_user.rooms.create room_params
-    # if @room_user_room.save
-    #   flash[:success] = "Room added"
-    # else
-    #   render :new
-    # end
+    @room.owner_id = current_user.id
 
     respond_to do |format|
       format.js
+    end
+  end
+
+  def edit
+    @room = Room.find_by id: params[:id]
+
+    respond_to do |format|
+      format.js
+    end
+  end
+
+  def update
+    @room = Room.find_by id: params[:id]
+    if @room.update_attributes room_params
+      @message = MessageRoom.new
+      flash.now[:success] = "Updated successfully"
+    else
+      flash[:danger] = "Updated failed"
+      redirect_to user_rooms_path
+    end
+    @messages = @room.message_rooms
+
+    respond_to do |format|
+      format.js
+      #format.html {redirect_to user_rooms_path}
     end
   end
 
@@ -34,6 +57,6 @@ class RoomsController < ApplicationController
   private
 
   def room_params
-    params.require(:room).permit :name, :description, :owner_id
+    params.require(:room).permit :name, :description
   end
 end

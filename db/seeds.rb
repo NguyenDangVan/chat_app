@@ -26,9 +26,8 @@ end
 end
 
 7.times do |n|
-  name = FFaker::Name.name
   description = FFaker::Lorem.paragraph
-  Room.create! name: name, owner_id: n + 1, description: description
+  Room.create! name: "Group #{n + 1}", owner_id: n + 1, description: description
 end
 
 5.times do |n|
