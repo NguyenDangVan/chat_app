@@ -8,4 +8,7 @@
 
 $(document).ready(function(){
   $('.alert').fadeOut(1000);
+  $('#startshowusers').click(function(){
+    $('#formshow').toggle();
+  });
 });

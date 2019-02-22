@@ -27,6 +27,7 @@ class RoomsController < ApplicationController
 
   def edit
     @room = Room.find_by id: params[:id]
+    @users_room = @room.users
 
     respond_to do |format|
       format.js
@@ -46,7 +47,6 @@ class RoomsController < ApplicationController
 
     respond_to do |format|
       format.js
-      #format.html {redirect_to user_rooms_path}
     end
   end
 

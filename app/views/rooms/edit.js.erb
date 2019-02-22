@@ -1,1 +1,5 @@
-$('#startnewchat .requests').html('<%= j render "rooms/form_edit_group" %>')
+<% if @users_room %>
+  $('#startnewchat .requests').html('<%= j render "rooms/list_users_group" %>');
+<% else %>
+  $('#startnewchat .requests').html('<%= j render "rooms/form_edit_group" %>')
+<% end %>
