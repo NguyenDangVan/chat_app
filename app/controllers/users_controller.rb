@@ -23,13 +23,18 @@ class UsersController < ApplicationController
     end
   end
 
-  def edit; end
+  def edit
+    respond_to do |format|
+      format.js
+      format.html
+    end
+  end
 
   def update
     if @user.update_attributes user_params
-      flash[:succes] = "Updated"
+      flash[:success] = "Updated user"
     else
-      render :edit
+      flash[:danger] = "Update failed"
     end
     redirect_to root_path
   end
@@ -38,9 +43,7 @@ class UsersController < ApplicationController
   private
 
   def load_user
-    @user = User.find_by id: params[:id]
-    return if @user
-
+    return if @user = User.find_by(id: params[:id])
     flash[:danger] = "Not found user"
     redirect_to root_path
   end

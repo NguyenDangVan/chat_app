@@ -3,7 +3,7 @@
     <div class="inside">
       <div class="nav nav-tab menu">
 
-        <%= link_to root_path, class: " btn" do %>
+        <%= link_to edit_user_path(current_user.id), data: {toggle: "modal", target: "#startnewchat"}, class: " btn", remote: true do %>
           <%= image_tag("avatars/avatar-male-1.jpg", alt: "avatar", class: "avatar-xl") %>
         <% end %>
 
