@@ -6,9 +6,10 @@ class User < ApplicationRecord
   has_many :rooms, through: :user_rooms
   has_many :message_rooms, through: :user_rooms
   has_many :relationships, class_name: "Relationship", foreign_key: :user_id, dependent: :destroy
+  has_many :request_relationships, class_name: "Relationship", foreign_key: :friend_id, dependent: :destroy
   has_many :friends, -> {where(relationships: {status_request: 1})}, through: :relationships, source: :friend
   has_many :blocks, -> {where(relationships: {status_request: 2})}, through: :relationships, source: :friend
-  has_many :pendings, -> {where(relationships: {status_request: 0})}, through: :relationships, source: :friend
+  has_many :pendings, -> {where(relationships: {status_request: 0})}, through: :request_relationships, source: :user
 
   validates :name,  presence: true, length: { maximum: 50 }
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
@@ -19,6 +20,10 @@ class User < ApplicationRecord
   has_secure_password
 
   scope :select_by, -> {select :id, :name, :email}
+
+  def list_friends
+    Relationship.where("(user_id = ? OR friend_id = ?) AND status_request = 0", self.id, self.id)
+  end
 
   def User.digest(string)
     cost = ActiveModel::SecurePassword.min_cost ? BCrypt::Engine::MIN_COST :
@@ -70,8 +75,8 @@ class User < ApplicationRecord
   # end
 
   def list_friends_of_current_user
-    id_friend = Relationship.your_friends(self).pluck(:friend_id).uniq
-    id_user = Relationship.your_friends(self).pluck(:user_id).uniq
+    id_friend = Relationship.your_friends(self).where(status_request: 1).pluck(:friend_id).uniq
+    id_user = Relationship.your_friends(self).where(status_request: 1).pluck(:user_id).uniq
     ids = (id_friend + id_user).uniq
     list = ids.map {|id| User.find_by id: id}
   end

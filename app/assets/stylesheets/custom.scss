@@ -34,9 +34,32 @@ a.btn {
 #delete {
   background-color: #d9534f;
   border-color: #d43f3a;
-  padding: 5px 6px;
   color: white;
+  padding: 5px 6px;
+  margin: 0 5px;
   font-size: 12px;
+}
+#accept {
+  background-color: #5bc0de;
+  border-color: #46b8da;
+  color: white;
+  padding: 5px 6px;
+  font-size: 12px;
+}
+
+#delete-requests {
+   background-color: #d9534f;
+  border-color: #d43f3a;
+  color: white;
+  padding: 10px 12px;
+  font-size: 25px;
+}
+#accept-requests {
+  background-color: #5bc0de;
+  border-color: #46b8da;
+  color: white;
+  padding: 10px 12px;
+  font-size: 25px;
 }
 .scrollit {
     overflow: scroll;
@@ -52,4 +75,41 @@ a.btn {
   span {
   color: red;
   }
+}
+
+.avatar .item {
+  min-width: 80px;
+  height: 80px;
+  width: 20%;
+  margin: auto;
+}
+.avatar {
+  width: 80px;
+  float: left;
+  margin-left: 50px;
+  margin-right: 12px
+}
+.item-content{
+  height: 100%;
+  padding-top: 25px;
+  margin: 20px 20px;
+  border: 1px solid;
+  border-radius: 5px
+}
+.request {
+  float:left;
+  height: 80px;
+  width: 70%;
+  margin: 20px 0 20px 0;
+}
+.action {
+  float:left;
+  width: 15%;
+  height: 80px;
+  margin: 20px 0 20px 0;
+}
+
+.pagination {
+  padding-top: 5px;
+  margin: 0 36%
 }

@@ -18,7 +18,7 @@
         <div class="dropdown">
           <button class="btn" data-toggle="dropdown"><i class="material-icons md-30">more_vert</i></button>
           <div class="dropdown-menu dropdown-menu-right">
-            <%= link_to edit_user_room_path(current_user.id, @room.id), class: "dropdown-item connect", data: {toggle: "modal", target: "#startnewchat"}, remote: true do %>
+            <%= link_to edit_room_path(@room.id), class: "dropdown-item connect", data: {toggle: "modal", target: "#startnewchat"}, remote: true do %>
               <i class="material-icons">settings</i>Edit Group
             <% end %>
 

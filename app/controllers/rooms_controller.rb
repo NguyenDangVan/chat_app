@@ -27,7 +27,9 @@ class RoomsController < ApplicationController
 
   def edit
     @room = Room.find_by id: params[:id]
-    @users_room = @room.users
+    if params[:user_id]
+      @users_room = @room.users
+    end
 
     respond_to do |format|
       format.js
@@ -38,7 +40,7 @@ class RoomsController < ApplicationController
     @room = Room.find_by id: params[:id]
     if @room.update_attributes room_params
       @message = MessageRoom.new
-      flash.now[:success] = "Updated successfully"
+      flash[:success] = "Updated successfully"
     else
       flash[:danger] = "Updated failed"
       redirect_to user_rooms_path

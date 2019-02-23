@@ -27,7 +27,7 @@ end
 
 7.times do |n|
   description = FFaker::Lorem.paragraph
-  Room.create! name: "Group #{n + 1}", owner_id: n + 1, description: description
+  Room.create! name: "Group #{n + 1}", owner_id: n + 1, description: "description too long #{n}"
 end
 
 5.times do |n|
@@ -58,6 +58,7 @@ end
     user_id: 1
 end
 
+# tao ban user 7 vs user 1
 2.times do |n|
   friend_id = n + 1
   Relationship.create! friend_id: friend_id,
