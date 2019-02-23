@@ -26,9 +26,10 @@
               <i class="material-icons">group_add</i>List Members
             <% end %>
             <hr>
-            <button class="dropdown-item"><i class="material-icons">power_settings_new</i>Leave Group</button>
             <% if @room.owner_id == current_user.id %>
               <button class="dropdown-item"><i class="material-icons">delete</i>Delete Contact</button>
+            <% else %>
+              <button class="dropdown-item"><i class="material-icons">power_settings_new</i>Leave Group</button>
             <% end %>
           </div>
         </div>

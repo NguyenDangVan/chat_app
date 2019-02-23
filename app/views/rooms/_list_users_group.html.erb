@@ -12,13 +12,21 @@
       </tr>
     </thead>
     <tbody>
-      <%- @users_room.each do |user| %>
+      <% @users_room.each do |user| %>
         <tr>
           <td><%= user.name %></td>
           <td><%= user.email %></td>
           <td>
-            <%= link_to room_user_room_path(@room.id, user_id: user.id), method: :delete, title: "Delete",class: "btn btn-danger btn-xs", id: "delete", remote: true do %>
-              <i class="fa fa-trash"></i>
+            <% if user.id == @room.owner_id %>
+              <%= link_to "", title: "Manager",class: "btn btn-warning btn-xs", id: "edit", remote: true do %>
+                <i class="fa fa-star"></i>
+              <% end %>
+            <% else %>
+              <% if current_user.id == @room.owner_id %>
+                <%= link_to room_user_room_path(@room.id, user_id: user.id), method: :delete, title: "Delete",class: "btn btn-danger btn-xs", id: "delete", remote: true do %>
+                  <i class="fa fa-trash"></i>
+                <% end %>
+              <% end %>
             <% end %>
           </td>
         </tr>
