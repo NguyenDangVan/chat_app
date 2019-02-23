@@ -21,7 +21,10 @@
             <%= link_to edit_user_room_path(current_user.id, @room.id), class: "dropdown-item connect", data: {toggle: "modal", target: "#startnewchat"}, remote: true do %>
               <i class="material-icons">settings</i>Edit Group
             <% end %>
-            <button class="dropdown-item connect" name="1"><i class="material-icons">group_add</i>List Members</button>
+
+            <%= link_to edit_user_room_path(current_user.id, @room.id), class: "dropdown-item connect", data: {toggle: "modal", target: "#startnewchat"}, remote: true do %>
+              <i class="material-icons">group_add</i>List Members
+            <% end %>
             <hr>
             <button class="dropdown-item"><i class="material-icons">power_settings_new</i>Leave Group</button>
             <% if @room.owner_id == current_user.id %>
@@ -33,9 +36,6 @@
     </div>
   </div>
 </div>
-
-<!-- end top chat -->
-<!-- start content messages -->
 
 <div class="content" id="content">
   <div class="container">

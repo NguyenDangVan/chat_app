@@ -1,0 +1,28 @@
+<div class="title">
+  <h1>List users</h1>
+  <button type="button" class="btn" data-dismiss="modal" aria-label="close"><i class="material-icons">close</i></button>
+</div>
+<div class="scrollit">
+  <table class="table table-hover" id="list-user-group">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <%- @users_room.each do |user| %>
+        <tr>
+          <td><%= user.name %></td>
+          <td><%= user.email %></td>
+          <td>
+            <%= link_to room_user_room_path(@room.id, user_id: user.id), method: :delete, title: "Delete",class: "btn btn-danger btn-xs", id: "delete", remote: true do %>
+              <i class="fa fa-trash"></i>
+            <% end %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
