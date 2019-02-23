@@ -1,4 +1,6 @@
 class MessagesController < ApplicationController
+  before_action :logged_in_user
+
   def new
     @users = User.all
     @message = Message.new
