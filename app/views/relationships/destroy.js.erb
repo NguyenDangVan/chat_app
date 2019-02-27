@@ -1,1 +1,5 @@
-$('#form_friend').html('<%= j render "users/add_friend" %>');
+<% if(@user_id) %>
+  $('.main').html('<%= j render "relationships/request_pending" %>');
+<% else %>
+  $('#form_friend').html('<%= j render "users/add_friend" %>');
+<% end %>

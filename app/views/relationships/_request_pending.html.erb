@@ -1,0 +1,33 @@
+<div class="tab-content" id="nav-tabContent">
+  <div class="babble tab-pane fade active show" id="list-chat" role="tabpanel" aria-labelledby="list-chat-list">
+    <div class="chat" id="chat1">
+      <div class="top" style="height: 100px; padding: 10px; border-bottom: 2px solid #bdbac2; ">
+        <h4 style="line-height: 100px; margin-left: 10px;">List friend request</h4>
+      </div>
+      <% @out_goings.each do |user| %>
+      <div style="width: 100%; overflow: hidden;">
+        <div style="margin-top: 20px; height: 150px">
+          <div class="item-content">
+            <%= link_to user_path(user.id), remote: true, data: {toggle: "modal", target: "#startnewchat"} do %>
+              <div class="avatar avatar--l fr-avatar">
+                <%= image_tag("avatars/avatar-female-1.jpg", alt: "avatar", class: "avatar-md item", title: "Janette") %>
+              </div>
+              <div class="title request"><%= user.name %></div>
+            <% end %>
+            <div class="action">
+              <div class="fr-button">
+                <%= link_to user_relationship_path(user.id, Relationship.find_by(user_id: user.id, status_request: 0)), title: "Close",class: "btn btn-danger btn-xs", id: "delete-requests", method: :delete, data: {confirm: "Are you sure?"}, remote: true do %>
+                <i class="fa fa-trash"></i>
+                <% end %>
+                <%= link_to relationship_path(id: Relationship.find_by(user_id: user.id, status_request: 0).id), title: "Accept", class: "btn btn-primary btn-xs", id: "accept-requests", method: :patch, remote: true do %>
+                <i class="fa fa-check"></i>
+                <% end %>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <% end %>
+    </div>
+  </div>
+</div>

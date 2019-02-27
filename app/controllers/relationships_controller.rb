@@ -40,20 +40,36 @@ class RelationshipsController < ApplicationController
 
   def destroy
     @relationship = Relationship.find_by(id: params[:id])
-    @user = Relationship.find_by(id: params[:id]).friend
-
-    current_user.un_friend @user
+    if params[:user_id]
+      @out_goings = current_user.pendings
+      @user_id = params[:user_id]
+      @relationship.destroy
+    else
+      @user = Relationship.find_by(id: params[:id]).friend
+      current_user.un_friend @user
+    end
 
     respond_to do |format|
       format.js
     end
   end
 
+  def edit
+  end
+
   def update
+    @pending = Relationship.find_by id: params[:id]
+    if @pending.update_attributes status_request: 1
+      flash.now[:success] = "Accept successfully"
+    else
+      flash.now[:danger] = "Accept failed"
+    end
+    redirect_to user_relationships_path(current_user.id)
   end
 
   def index
     @users = current_user.list_friends_of_current_user
+    @out_goings = current_user.pendings
     @q = User.search params[:q]
     @user = @q.result distinct: true
   end
