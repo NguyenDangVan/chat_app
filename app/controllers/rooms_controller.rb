@@ -19,10 +19,15 @@ class RoomsController < ApplicationController
   def create
     @room = current_user.rooms.create room_params
     @room.owner_id = current_user.id
-
-    respond_to do |format|
-      format.js
+    if @room.save
+      flash[:success] = "Create group successfully"
+    else
+      flash[:danger] = "Create group failed"
     end
+
+    # respond_to do |format|
+    #   format.js
+    # end
   end
 
   def edit
@@ -53,7 +58,8 @@ class RoomsController < ApplicationController
   end
 
   def index
-    @rooms = Room.all
+    @rooms = Room.where(owner_id: current_user.id)
+    @groups_of_user = current_user.rooms
   end
 
   private
