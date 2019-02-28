@@ -7,4 +7,7 @@ class Room < ApplicationRecord
 
   validates :name, presence: true, length: {maximum: 50}
   validates :description, presence: true, length: {maximum: 255}
+
+  scope :order_name, ->{order name: :ASC}
+  scope :groups_of_user, ->(id){where owner_id: id}
 end

@@ -18,14 +18,16 @@
           </div>
           <div class="list-group sort">
             <button class="btn filterDiscussionsBtn active show" data-toggle="list" data-filter="all">All</button>
-            <button class="btn filterDiscussionsBtn" data-toggle="list" data-filter="read">Joined</button>
+            <!--<button class="btn filterDiscussionsBtn" data-toggle="list" data-filter="read">My Groups</button> -->
+            <%= button_tag(class: "btn filterDiscussionsBtn", data: {toggle: "list", filter: "read"}) do %>
+              My Groups
+            <% end %>
           </div>
           <div class="discussions">
             <h1>Groups</h1>
             <div class="list-group" id="chats" role="tablist">
-
-              <%= render partial: "rooms/list_groups", locals: {rooms: @rooms} %>
-
+              <%= render partial: "rooms/all_groups", locals: {rooms: @rooms} %>
+              <%= render partial: "rooms/groups_of_user", locals: {rooms: @rooms_of_user} %>
             </div>
           </div>
         </div>

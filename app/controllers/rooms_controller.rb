@@ -52,6 +52,7 @@ class RoomsController < ApplicationController
 
   def index
     @rooms = Room.all
+    @rooms_of_user = Room.groups_of_user(current_user.id)
   end
 
   private
