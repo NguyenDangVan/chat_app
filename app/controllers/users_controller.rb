@@ -39,9 +39,7 @@ class UsersController < ApplicationController
     redirect_to root_path
   end
 
-
   private
-
   def load_user
     return if @user = User.find_by(id: params[:id])
     flash[:danger] = "Not found user"
@@ -49,6 +47,6 @@ class UsersController < ApplicationController
   end
 
   def user_params
-    params.require(:user).permit :name, :email, :address, :password, :password_confirmation
+    params.require(:user).permit :name, :email, :avatar, :address, :password, :password_confirmation
   end
 end

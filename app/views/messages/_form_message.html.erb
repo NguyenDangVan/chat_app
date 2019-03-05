@@ -3,7 +3,7 @@
     <div class="col-md-12">
       <div class="inside">
         <%= link_to user_path(@user.id), remote: true, data: {toggle: "modal", target: "#startnewchat"} do %>
-          <%= image_tag("avatars/avatar-female-1.jpg", alt: "avatar", class: "avatar-md", title: "Janette") %>
+          <%= image_tag(@user.avatar, alt: "No image", class: "avatar-md", title: "Janette") %>
         <% end %>
         <div class="status">
           <i class="material-icons online">fiber_manual_record</i>
@@ -18,9 +18,6 @@
         <div class="dropdown">
           <button class="btn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="material-icons md-30">more_vert</i></button>
           <div class="dropdown-menu dropdown-menu-right">
-            <button class="dropdown-item connect" name="1"><i class="material-icons">phone_in_talk</i>Voice Call</button>
-            <button class="dropdown-item connect" name="1"><i class="material-icons">videocam</i>Video Call</button>
-            <hr>
             <button class="dropdown-item"><i class="material-icons">clear</i>Clear History</button>
             <button class="dropdown-item"><i class="material-icons">block</i>Block Contact</button>
             <button class="dropdown-item"><i class="material-icons">delete</i>Delete Contact</button>
