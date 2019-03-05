@@ -38,9 +38,6 @@ class User < ApplicationRecord
     BCrypt::Password.new(digest).is_password?(token)
   end
 
-  def accepted user
-  end
-
   def un_friend user
     friends.delete user
   end
@@ -49,21 +46,17 @@ class User < ApplicationRecord
     pendings.pluck(:id).include?(other_user.id)
   end
 
-  def assign_me? user
-
-  end
-
   def is_friend? other_user
     list_friends_of_current_user.pluck(:id).include?(other_user.id)
+  end
+
+  def blocked? other_user
+    blocks.pluck(:id).include?(other_user.id)
   end
 
   def not_friend
     ids = User.all.pluck(:id) - self.list_friends_of_current_user.pluck(:id)
     list = ids.map {|id| User.find_by id: id}
-  end
-
-  def blocked? other_user
-    blocks.pluck(:id).include?(other_user.id)
   end
 
   def list_relationships
@@ -79,7 +72,8 @@ class User < ApplicationRecord
     id_friend = Relationship.your_friends(self).where(status_request: 1).pluck(:friend_id).uniq
     id_user = Relationship.your_friends(self).where(status_request: 1).pluck(:user_id).uniq
     ids = (id_friend + id_user).uniq
-    list = ids.map {|id| User.find_by id: id}
+    ids.delete(self.id)
+    list = ids.map {|id| User.where.not(id: self.id).find_by(id: id)}
   end
 
   def message_private

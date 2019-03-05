@@ -46,9 +46,9 @@ class RelationshipsController < ApplicationController
       @relationship.destroy
       flash[:danger] = "Delete successfully"
     else
-      @user = Relationship.find_by(id: params[:id]).friend
+      @user = Relationship.find_by(id: params[:relationship][:friend_id]).friend
       current_user.un_friend @user
-      flash[:danger] = "Delete successfully"
+      flash[:danger] = "Delete friend successfully"
     end
 
     respond_to do |format|
