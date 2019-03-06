@@ -19,15 +19,22 @@ class RoomsController < ApplicationController
   def create
     @room = current_user.rooms.create room_params
     @room.owner_id = current_user.id
-
-    respond_to do |format|
-      format.js
+    if @room.save
+      flash[:success] = "Create group successfully"
+    else
+      flash[:danger] = "Create group failed"
     end
+
+    # respond_to do |format|
+    #   format.js
+    # end
   end
 
   def edit
     @room = Room.find_by id: params[:id]
-    @users_room = @room.users
+    if params[:user_id]
+      @users_room = @room.users
+    end
 
     respond_to do |format|
       format.js
@@ -38,7 +45,7 @@ class RoomsController < ApplicationController
     @room = Room.find_by id: params[:id]
     if @room.update_attributes room_params
       @message = MessageRoom.new
-      flash.now[:success] = "Updated successfully"
+      flash[:success] = "Updated successfully"
     else
       flash[:danger] = "Updated failed"
       redirect_to user_rooms_path
@@ -51,7 +58,8 @@ class RoomsController < ApplicationController
   end
 
   def index
-    @rooms = Room.all
+    @rooms = Room.where(owner_id: current_user.id)
+    @groups_of_user = current_user.rooms
   end
 
   private

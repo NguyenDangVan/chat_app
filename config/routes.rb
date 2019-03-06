@@ -9,12 +9,11 @@ Rails.application.routes.draw do
   resources :users do
     resources :relationships
     resources :messages
-    resources :rooms do
-      resources :message_rooms, only: :create
-    end
+    resources :rooms
   end
   resources :rooms do
     resources :user_rooms, only: :destroy
   end
+  resources :message_rooms
   resources :relationships
 end

@@ -18,7 +18,7 @@
         <div class="dropdown">
           <button class="btn" data-toggle="dropdown"><i class="material-icons md-30">more_vert</i></button>
           <div class="dropdown-menu dropdown-menu-right">
-            <%= link_to edit_user_room_path(current_user.id, @room.id), class: "dropdown-item connect", data: {toggle: "modal", target: "#startnewchat"}, remote: true do %>
+            <%= link_to edit_room_path(@room.id), class: "dropdown-item connect", data: {toggle: "modal", target: "#startnewchat"}, remote: true do %>
               <i class="material-icons">settings</i>Edit Group
             <% end %>
 
@@ -46,7 +46,7 @@
         <span>Today</span>
         <hr>
       </div>
-      <div id="messages_private">
+      <div id="messages_private" data-group="<%= @room.id %>" data-sender_id="<%= current_user.id %>">
         <% messages.each do |message| %>
           <%= render "rooms/message", message: message %>
         <% end %>
@@ -73,8 +73,9 @@
 <div class="container">
   <div class="col-md-12">
     <div class="bottom">
-      <%= form_for [current_user, @room, @message], html: {class: "position-relative w-100"}, remote: true do |f| %>
-        <%= f.text_area :content, class: "form-control", data: {behavior: "room_speaker"}, placeholder: "Start typing for reply...", rows: "1" %>
+      <%= form_for @message, method: :post, html: {class: "position-relative w-100"}, remote: true do |f| %>
+        <%= f.text_area :content, class: "form-control", data: {behavior: "group_speaker", }, placeholder: "Start typing for reply...", rows: "1" %>
+        <%= f.hidden_field :room_id, value: @room.id%>
         <%= f.button :submit, class: "btn emoticons" do %>
           <i class="material-icons">insert_emoticon</i>
         <% end %>

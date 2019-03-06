@@ -18,9 +18,6 @@
         <div class="dropdown">
           <button class="btn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="material-icons md-30">more_vert</i></button>
           <div class="dropdown-menu dropdown-menu-right">
-            <button class="dropdown-item connect" name="1"><i class="material-icons">phone_in_talk</i>Voice Call</button>
-            <button class="dropdown-item connect" name="1"><i class="material-icons">videocam</i>Video Call</button>
-            <hr>
             <button class="dropdown-item"><i class="material-icons">clear</i>Clear History</button>
             <button class="dropdown-item"><i class="material-icons">block</i>Block Contact</button>
             <button class="dropdown-item"><i class="material-icons">delete</i>Delete Contact</button>
@@ -39,7 +36,7 @@
         <span>Today</span>
         <hr>
       </div>
-        <div id="messages_private" data-recipient_id="<%= @user.id %>">
+        <div id="messages_private" data-recipient_id="<%= @user.id %>" data-sender_id="<%= current_user.id %>">
           <% if !@messages.empty? %>
             <% messages.each do |message| %>
               <%= render "messages/message", message: message %>
