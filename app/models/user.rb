@@ -11,6 +11,8 @@ class User < ApplicationRecord
   has_many :blocks, -> {where(relationships: {status_request: 2})}, through: :relationships, source: :friend
   has_many :pendings, -> {where(relationships: {status_request: 0})}, through: :request_relationships, source: :user
 
+  mount_uploader :avatar, AvatarUploader
+
   validates :name,  presence: true, length: { maximum: 50 }
   validates :address,  presence: true, length: { maximum: 50 }
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i

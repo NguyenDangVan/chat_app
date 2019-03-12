@@ -1,3 +1,4 @@
+<% provide :title, "Edit user" %>
 <div class="sidebar" id="sidebar">
   <div class="container">
     <div class="col-md-12">
@@ -5,7 +6,7 @@
         <div class="tab-pane fade active show" id="settings">
           <div class="settings">
             <div class="profile">
-              <%= image_tag("avatars/avatar-male-1.jpg", class: "avatar-xl", alt: "avatar") %>
+              <%= image_tag(current_user.avatar, class: "avatar-xl", alt: "avatar") %>
               <h1><%= link_to current_user.name, "#" %></h1>
               <span><%= current_user.address %></span>
               <div class="stats">
@@ -36,39 +37,39 @@
                 </a>
                 <div class="collapse" id="collapseOne" aria-labelledby="headingOne" data-parent="#accordionSettings">
                   <div class="content">
-                    <div class="upload">
-                      <div class="data">
-                        <%= image_tag("avatars/avatar-male-1.jpg", class: "avatar-xl", alt: "image") %>
-                        <label>
-                          <input type="file">
-                          <span class="btn button">Upload avatar</span>
-                        </label>
-                      </div>
-                      <p>For best results, use an image at least 256px by 256px in either .jpg or .png format!</p>
-                    </div>
                     <%= form_for @user do |f| %>
-                        <div class="field">
-                          <%= f.label :name, "Your Name"%>
-                          <span>*</span>
-                          <%= f.text_field :name, class: "form-control", id: "firstName", placeholder: "Your name", value: current_user.name %>
+                      <div class="upload">
+                        <div class="data">
+                          <%= image_tag(current_user.avatar, class: "avatar-xl", alt: "image") %>
+                          <%= f.label :avatar do %>
+                            <%= f.file_field :avatar, class: "btn upload_image" %>
+                          <% end %>
                         </div>
-                        <div class="field">
-                          <%= f.label :email %>
-                          <span>*</span>
-                          <%= f.email_field :email, class: "form-control", id: "email", placeholder: "Enter your email address", value: current_user.email %>
-                        </div>
-                        <div class="field">
-                          <%= f.label :address, "Location" %>
-                          <span>*</span>
-                          <%= f.text_field :address, class: "form-control", id: "location", placeholder: "Enter your location", value: current_user.address %>
-                        </div>
-                        <div class="field">
-                          <%= f.label :password, "Password" %>
-                          <span>*</span>
-                          <%= f.password_field :password, class: "form-control", id: "password", placeholder: "Enter new password"%>
-                        </div>
-                        <%= f.submit "Apply", class: "btn button w-100" %>
-                      <% end %>
+                        <p>For best results, use an image at least 256px by 256px in either .jpg or .png format!</p>
+                      </div>
+
+                      <div class="field">
+                        <%= f.label :name, "Your Name"%>
+                        <span>*</span>
+                        <%= f.text_field :name, class: "form-control", autocomplete: :off, id: "firstName", placeholder: "Your name", value: current_user.name %>
+                      </div>
+                      <div class="field">
+                        <%= f.label :email %>
+                        <span>*</span>
+                        <%= f.email_field :email, class: "form-control", autocomplete: :off, id: "email", placeholder: "Enter your email address", value: current_user.email %>
+                      </div>
+                      <div class="field">
+                        <%= f.label :address, "Location" %>
+                        <span>*</span>
+                        <%= f.text_field :address, class: "form-control", autocomplete: :off, id: "location", placeholder: "Enter your location", value: current_user.address %>
+                      </div>
+                      <div class="field">
+                        <%= f.label :password, "Password" %>
+                        <span>*</span>
+                        <%= f.password_field :password, class: "form-control", autocomplete: :off, id: "password", placeholder: "Enter new password"%>
+                      </div>
+                      <%= f.submit "Apply", class: "btn button w-100" %>
+                    <% end %>
                   </div>
                 </div>
               </div>

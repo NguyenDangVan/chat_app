@@ -3,7 +3,7 @@
     <div class="col-md-12">
       <div class="inside">
         <%= link_to user_path(@user.id), remote: true, data: {toggle: "modal", target: "#startnewchat"} do %>
-          <%= image_tag("avatars/avatar-female-1.jpg", alt: "avatar", class: "avatar-md", title: "Janette") %>
+          <%= image_tag(@user.avatar, alt: "No image", class: "avatar-md", title: "Janette") %>
         <% end %>
         <div class="status">
           <i class="material-icons online">fiber_manual_record</i>
