@@ -1,4 +1,5 @@
 //= require jquery
+//= require select2
 //= require custom
 //= require jquery_ujs
 //= require popper.min

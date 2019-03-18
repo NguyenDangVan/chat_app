@@ -16,4 +16,7 @@ Rails.application.routes.draw do
   end
   resources :message_rooms
   resources :relationships
+  namespace :searches do
+    resources :users, only: :index
+  end
 end
