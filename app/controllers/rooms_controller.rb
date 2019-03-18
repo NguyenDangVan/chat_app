@@ -1,5 +1,8 @@
 class RoomsController < ApplicationController
   before_action :logged_in_user
+  before_action :set_room, only: [:show, :edit, :destroy, :update]
+  before_action :set_user_room, only: :show
+
 
   def new
     @room = Room.new
@@ -10,28 +13,29 @@ class RoomsController < ApplicationController
   end
 
   def show
-    @room = Room.find_by id: params[:id]
-
     @messages = @room.message_rooms
     @message = MessageRoom.new
   end
 
   def create
     @room = current_user.rooms.create room_params
+    params[:members].each {|a| UserRoom.create user_id: a, room_id: @room.id}
     @room.owner_id = current_user.id
+    @messages = @room.message_rooms
     if @room.save
       flash[:success] = "Create group successfully"
+
     else
       flash[:danger] = "Create group failed"
     end
 
+    redirect_to user_rooms_path
     # respond_to do |format|
     #   format.js
     # end
   end
 
   def edit
-    @room = Room.find_by id: params[:id]
     if params[:user_id]
       @users_room = @room.users
     end
@@ -42,7 +46,6 @@ class RoomsController < ApplicationController
   end
 
   def update
-    @room = Room.find_by id: params[:id]
     if @room.update_attributes room_params
       @message = MessageRoom.new
       flash[:success] = "Updated successfully"
@@ -57,6 +60,12 @@ class RoomsController < ApplicationController
     end
   end
 
+  def destroy
+    @room.destroy
+    flash[:success] = "Your group deleted."
+    redirect_to user_rooms_path(current_user.id)
+  end
+
   def index
     @rooms = Room.where(owner_id: current_user.id)
     @groups_of_user = current_user.rooms
@@ -66,5 +75,13 @@ class RoomsController < ApplicationController
 
   def room_params
     params.require(:room).permit :name, :description
+  end
+
+  def set_room
+    @room = Room.find_by id: params[:id]
+  end
+
+  def set_user_room
+    @user_room = UserRoom.find_by id: current_user.id
   end
 end

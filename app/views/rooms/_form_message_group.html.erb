@@ -27,9 +27,13 @@
             <% end %>
             <hr>
             <% if @room.owner_id == current_user.id %>
-              <button class="dropdown-item"><i class="material-icons">delete</i>Delete Contact</button>
+              <%= button_to @room, class: "dropdown-item", method: :delete do %>
+                <i class="material-icons">delete</i>Delete Group
+              <% end %>
             <% else %>
-              <button class="dropdown-item"><i class="material-icons">power_settings_new</i>Leave Group</button>
+              <%= button_to @user_room, class: "dropdown-item", method: :delete do %>
+                <i class="material-icons">power_settings_new</i>Leave Group
+              <% end %>
             <% end %>
           </div>
         </div>
