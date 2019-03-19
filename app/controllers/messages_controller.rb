@@ -9,7 +9,16 @@ class MessagesController < ApplicationController
   end
 
   def create
-    @message = current_user.messages.create message_params
+    if params[:mess_for_users]
+      byebug
+      params[:mess_for_users].each {
+        |a| Message.create content: params[:message][:content],
+          user_id: current_user.id,
+          recipient_id: a}
+      redirect_to user_messages_path(current_user.id)
+    else
+      @message = current_user.messages.create message_params
+    end
 
     format_js
   end
