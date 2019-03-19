@@ -10,7 +10,6 @@ class MessagesController < ApplicationController
 
   def create
     if params[:mess_for_users]
-      byebug
       params[:mess_for_users].each {
         |a| Message.create content: params[:message][:content],
           user_id: current_user.id,

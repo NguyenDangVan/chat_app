@@ -1,0 +1,17 @@
+<div class="col-md-2 todo">
+	<div class="complete">
+			lalalall
+	</div>
+</div>
+<div class="col-md-8 todo">
+	<div class="todo_item">
+		<p style="opacity: 0.4;"><%= todo_item.content %></p>
+	</div>
+</div>
+<div class="col-md-2 todo" style="color: white">
+	<div class="trash">
+		<%= link_to todo_list_todo_item_path(todo_list, todo_item.id), method: :delete, data: { confirm: "Are you sure?" } do %>
+			<i class="fa fa-trash"></i>
+		<% end %>
+	</div>
+</div>

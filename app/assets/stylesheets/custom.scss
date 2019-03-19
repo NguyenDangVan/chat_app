@@ -2,9 +2,13 @@
   .profile{
     margin: 15px 0;
   };
-  background-color: #dbd7d7 !important;
+  background: -webkit-linear-gradient(40deg, #4CB8C4 10%, #EAECC6 100%);
+  background:    -moz-linear-gradient(40deg, #4CB8C4 10%, #EAECC6 100%);
+  background:     -ms-linear-gradient(40deg, #4CB8C4 10%, #EAECC6 100%);
+  background:      -o-linear-gradient(40deg, #4CB8C4 10%, #EAECC6 100%);
+  background:         linear-gradient(40deg, #4CB8C4 10%, #EAECC6 100%);
   .title{
-    background-color: #c0c0c0 !important
+    background-color: #64c7be !important
   }
   .item{
     float: left;
@@ -122,4 +126,11 @@ a.btn {
   display: block !important;
   width: 170px;
   background-color: #2196F3;
+}
+
+#todo_list {
+  color: black;
+  .todo {
+    border: solid white 1px;
+  }
 }

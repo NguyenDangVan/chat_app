@@ -1,0 +1,23 @@
+<div class="content" style="color: black">
+	<p id="notice"><%= notice %></p>
+	<% @todo_lists.each do |todo_list| %>
+		<p>
+			<strong>Title:</strong>
+			<%= todo_list.title %>
+		</p>
+		<p>
+			<strong>Description:</strong>
+			<%= todo_list.description %>
+		</p>
+		<div class="row" id="todo_list">
+			<% todo_list.todo_items.each do |todo_item| %>
+				<%= render "todo_items/todo_items", todo_list: todo_list, todo_item: todo_item %>
+			<% end %>
+		</div>
+		<div class="links">
+			<%= link_to "New Todo List", new_todo_list_path %>
+		</div>
+		<%= link_to 'Edit', edit_todo_list_path(todo_list) %> |
+		<%= link_to 'Back', todo_lists_path %>
+	<% end %>
+</div>

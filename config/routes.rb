@@ -19,4 +19,7 @@ Rails.application.routes.draw do
   namespace :searches do
     resources :users, only: :index
   end
+  resources :todo_lists do
+    resources :todo_items
+  end
 end

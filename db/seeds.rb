@@ -65,3 +65,15 @@ end
     status_request: 1,
     user_id: 7
 end
+
+#tao friend request
+
+Relationship.create! friend_id: 1,
+  status_request: 0,
+  user_id: 2
+
+Relationship.create! friend_id: 1,
+  status_request: 0,
+  user_id: 3
+
+TodoList.create title: "Daily Work", description: "do tasks everyday", user_room_id: 1

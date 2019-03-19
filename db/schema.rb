@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190212062539) do
+ActiveRecord::Schema.define(version: 20190319170403) do
 
   create_table "message_rooms", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "content"
@@ -48,6 +48,23 @@ ActiveRecord::Schema.define(version: 20190212062539) do
     t.datetime "updated_at",                null: false
   end
 
+  create_table "todo_items", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string   "content"
+    t.integer  "todo_list_id"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+    t.index ["todo_list_id"], name: "index_todo_items_on_todo_list_id", using: :btree
+  end
+
+  create_table "todo_lists", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string   "title"
+    t.text     "description",  limit: 65535
+    t.integer  "user_room_id"
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
+    t.index ["user_room_id"], name: "index_todo_lists_on_user_room_id", using: :btree
+  end
+
   create_table "user_rooms", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer  "user_id"
     t.integer  "room_id"
@@ -77,6 +94,8 @@ ActiveRecord::Schema.define(version: 20190212062539) do
   add_foreign_key "message_rooms", "user_rooms"
   add_foreign_key "messages", "users"
   add_foreign_key "relationships", "users"
+  add_foreign_key "todo_items", "todo_lists"
+  add_foreign_key "todo_lists", "user_rooms"
   add_foreign_key "user_rooms", "rooms"
   add_foreign_key "user_rooms", "users"
 end
