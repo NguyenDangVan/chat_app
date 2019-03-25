@@ -14,7 +14,9 @@
         </div>
         <button class="btn connect d-md-block d-none" name="1"><i class="material-icons md-30">phone_in_talk</i></button>
         <button class="btn connect d-md-block d-none" name="1"><i class="material-icons md-36">videocam</i></button>
-        <button class="btn d-md-block d-none"><i class="material-icons md-30">info</i></button>
+        <%= link_to room_todo_lists_path(@room), class: "btn d-md-block d-none", data: {toggle: "modal", target: "#startnewchat"}, remote: true do %>
+          <i class="material-icons md-30">info</i>
+        <% end %>
         <div class="dropdown">
           <button class="btn" data-toggle="dropdown"><i class="material-icons md-30">more_vert</i></button>
           <div class="dropdown-menu dropdown-menu-right">

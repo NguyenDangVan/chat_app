@@ -1,0 +1,37 @@
+<h1 class="todo_title">New Todo List</h1>
+
+<div class="forms">
+  <%= form_for [@room, @todo_list], remote: true do |form| %>
+    <% if @todo_list.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(@todo_list.errors.count, "error") %> prohibited this todo_list from being saved:</h2>
+
+        <ul>
+        <% @todo_list.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <div class="field">
+      <%= form.hidden_field :user_room_id, value: @user_room.id %>
+      <%= form.hidden_field :room_id, value: @user_room.room_id %>
+      <%= form.label :title %>
+      <%= form.text_field :title, id: :todo_list_title, autocomplete: :off %>
+    </div>
+
+    <div class="field">
+      <%= form.label :description %>
+      <%= form.text_area :description, id: :todo_list_description, autocomplete: :off %>
+    </div>
+
+    <div class="actions">
+      <%= form.submit %>
+    </div>
+  <% end %>
+</div>
+
+<div class="links">
+<%= link_to 'Back', room_todo_lists_path(@room), remote: true %>
+</div>

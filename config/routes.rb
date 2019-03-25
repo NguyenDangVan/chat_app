@@ -13,6 +13,13 @@ Rails.application.routes.draw do
   end
   resources :rooms do
     resources :user_rooms, only: :destroy
+    resources :todo_lists do
+      resources :todo_items do
+        member do
+          patch :complete
+        end
+      end
+    end
   end
   resources :message_rooms
   resources :relationships

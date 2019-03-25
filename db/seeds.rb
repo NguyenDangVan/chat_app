@@ -52,7 +52,7 @@ end
 end
 
 4.times do |n|
-  friend_id = n +1
+  friend_id = n + 1
   Relationship.create! friend_id: friend_id,
     status_request: 1,
     user_id: 1
@@ -65,3 +65,26 @@ end
     status_request: 1,
     user_id: 7
 end
+
+#tao friend request
+
+Relationship.create! friend_id: 1,
+  status_request: 0,
+  user_id: 8
+
+Relationship.create! friend_id: 1,
+  status_request: 0,
+  user_id: 9
+
+TodoList.create title: "Daily Work", description: "do tasks everyday", user_room_id: 1, room_id: 1
+TodoItem.create content: "6am: day nay com", todo_list_id: 1
+TodoItem.create content: "7:45am: vao lam", todo_list_id: 1
+TodoItem.create content: "11:45am: an com trua", todo_list_id: 1
+
+TodoList.create title: "Task #226523", description: "[Job] save data trường Job 企業担当者名", user_room_id: 1, room_id: 1
+TodoItem.create content: "luu truong cach thuc", todo_list_id: 2
+TodoItem.create content: "cho chon nhieu PIC", todo_list_id: 2
+TodoList.create title: "Task #226525", description: "[Job] export csv vs search truong Job 企業担当者名", user_room_id: 1, room_id: 1
+
+TodoList.create title: "Task #226523", description: "[Job] save data trường Job 企業担当者名", user_room_id: 1, room_id: 2
+TodoItem.create content: "7:15am: gio bat dau di lam", todo_list_id: 1
