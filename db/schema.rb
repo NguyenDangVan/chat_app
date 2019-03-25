@@ -12,23 +12,6 @@
 
 ActiveRecord::Schema.define(version: 20190319170403) do
 
-  create_table "friend_requests", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.integer  "user_id"
-    t.integer  "friend_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["user_id"], name: "index_friend_requests_on_user_id", using: :btree
-  end
-
-  create_table "friendships", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.integer  "user_id"
-    t.integer  "friend_id"
-    t.integer  "status",     default: 0
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
-    t.index ["user_id"], name: "index_friendships_on_user_id", using: :btree
-  end
-
   create_table "message_rooms", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "content"
     t.integer  "user_room_id"
@@ -77,8 +60,10 @@ ActiveRecord::Schema.define(version: 20190319170403) do
     t.string   "title"
     t.text     "description",  limit: 65535
     t.integer  "user_room_id"
+    t.integer  "room_id"
     t.datetime "created_at",                 null: false
     t.datetime "updated_at",                 null: false
+    t.index ["room_id"], name: "index_todo_lists_on_room_id", using: :btree
     t.index ["user_room_id"], name: "index_todo_lists_on_user_room_id", using: :btree
   end
 
@@ -108,13 +93,10 @@ ActiveRecord::Schema.define(version: 20190319170403) do
     t.index ["name"], name: "index_users_on_name", using: :btree
   end
 
-  add_foreign_key "friend_requests", "users"
-  add_foreign_key "friendships", "users"
   add_foreign_key "message_rooms", "user_rooms"
   add_foreign_key "messages", "users"
   add_foreign_key "relationships", "users"
   add_foreign_key "todo_items", "todo_lists"
-  add_foreign_key "todo_lists", "user_rooms"
   add_foreign_key "user_rooms", "rooms"
   add_foreign_key "user_rooms", "users"
 end

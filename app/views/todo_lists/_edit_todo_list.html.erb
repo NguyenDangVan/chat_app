@@ -1,0 +1,26 @@
+<h1 class="todo_title">Edit Todo List</h1>
+
+<div class="forms" style="margin-left: 1em">
+  <%= form_for [@room, @todo_list], remote: true do |form| %>
+
+    <div class="field">
+      <%= form.hidden_field :user_room_id, value: @user_room.id %>
+      <%= form.hidden_field :room_id, value: @user_room.room_id %>
+      <%= form.label :title %>
+      <%= form.text_field :title, id: :todo_list_title, autocomplete: :off %>
+    </div>
+
+    <div class="field">
+      <%= form.label :description %>
+      <%= form.text_area :description, id: :todo_list_description, autocomplete: :off %>
+    </div>
+
+    <div class="actions">
+      <%= form.submit %>
+    </div>
+  <% end %>
+</div>
+
+<div class="links">
+  <%= link_to 'Cancel', room_todo_lists_path(@room), remote: true %>
+</div>

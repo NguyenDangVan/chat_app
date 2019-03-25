@@ -1,0 +1,10 @@
+<% @todo_lists.each do |todo_list| %>
+  <div class="row-todo">
+    <h2 class="todo_title"><%= link_to todo_list.title, room_todo_list_path(id: todo_list.id), remote: true %></h2>
+    <p class="todo_sub_title"><%= todo_list.description %></p>
+  </div>
+<% end %>
+
+<div class="links">
+  <%= link_to "New Todo List", new_room_todo_list_path(@room), remote: true %>
+</div>
