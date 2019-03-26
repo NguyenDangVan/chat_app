@@ -1,20 +1,43 @@
-<div class="col-md-2 todo">
-	<div class="complete">
-		<%= link_to complete_room_todo_list_todo_item_path(room, todo_list, todo_item.id), method: :patch do %>
-			<i style="opacity: 0.4;" class="fa fa-check"></i>
-		<% end %>
+<% if todo_item.complete? %>
+	<div class="col-md-2 todo">
+		<div class="complete">
+			<%= link_to complete_room_todo_list_todo_item_path(room, todo_list, todo_item.id), method: :patch, remote: true do %>
+				<i style="opacity: 0.4;" class="fa fa-check"></i>
+			<% end %>
+		</div>
 	</div>
-</div>
-<div class="col-md-8 todo">
-	<div class="todo_item">
-		<p style="opacity: 0.4;"><%= todo_item.content %></p>
+	<div class="col-md-8 todo" style="border-left: 1px solid rgba(250, 250, 250, 0.3); border-right: 1px solid rgba(250, 250, 250, 0.3)">
+		<div class="todo_item">
+			<p style="opacity: 0.4;"><strike><%= todo_item.content %></strike></p>
+		</div>
 	</div>
-</div>
-<div class="col-md-2 todo" style="color: white">
-	<div class="trash">
-		<%= link_to room_todo_list_todo_item_path(room, todo_list, todo_item.id), method: :delete,
-			data: {confirm: "Are you sure?"}, remote: true do %>
-			<i class="fa fa-trash"></i>
-		<% end %>
+	<div class="col-md-2 todo" style="color: white">
+		<div class="trash">
+			<%= link_to room_todo_list_todo_item_path(room, todo_list, todo_item.id), method: :delete,
+				data: {confirm: "Are you sure?"}, remote: true do %>
+				<i class="fa fa-trash"></i>
+			<% end %>
+		</div>
 	</div>
-</div>
+<% else %>
+	<div class="col-md-2 todo">
+		<div class="complete">
+			<%= link_to complete_room_todo_list_todo_item_path(room, todo_list, todo_item.id), method: :patch, remote: true do %>
+				<i class="fa fa-circle-thin"></i>
+			<% end %>
+		</div>
+	</div>
+	<div class="col-md-8 todo" style="border-left: 1px solid rgba(250, 250, 250, 0.3); border-right: 1px solid rgba(250, 250, 250, 0.3)">
+		<div class="todo_item">
+			<p><%= todo_item.content %></p>
+		</div>
+	</div>
+	<div class="col-md-2 todo" style="color: white">
+		<div class="trash">
+			<%= link_to room_todo_list_todo_item_path(room, todo_list, todo_item.id), method: :delete,
+				data: {confirm: "Are you sure?"}, remote: true do %>
+				<i class="fa fa-trash"></i>
+			<% end %>
+		</div>
+	</div>
+<% end %>
