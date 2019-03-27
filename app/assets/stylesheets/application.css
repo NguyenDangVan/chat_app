@@ -1,5 +1,7 @@
 /*
  *= require select2
+ *= require bootstrap-datepicker
+ *= require datetimepicker
  *= require bootstrap.min
  *= require swipe.min
  *= require custom
