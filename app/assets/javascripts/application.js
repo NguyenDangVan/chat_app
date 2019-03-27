@@ -1,5 +1,7 @@
 //= require jquery
 //= require select2
+//= require bootstrap-datepicker/core
+//= require datetimepicker
 //= require custom
 //= require jquery_ujs
 //= require popper.min

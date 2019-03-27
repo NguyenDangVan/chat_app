@@ -25,5 +25,6 @@ Rails.application.routes.draw do
   resources :relationships
   namespace :searches do
     resources :users, only: :index
+    resources :room_members, only: [:show, :index]
   end
 end

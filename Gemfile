@@ -5,6 +5,12 @@ git_source(:github) do |repo_name|
   "https://github.com/#{repo_name}.git"
 end
 
+source "https://rails-assets.org" do
+  gem "rails-assets-datetimepicker"
+end
+
+gem "bootstrap-datepicker-rails"
+
 gem "bcrypt", "~> 3.1.7"
 gem "bootsnap", ">= 1.1.0", require: false
 gem 'bootstrap4-kaminari-views'

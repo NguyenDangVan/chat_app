@@ -203,7 +203,7 @@ a.btn {
 }
 
 .todo_sub_title {
-  margin: 0 0 2em 0;
+  margin: 0 0 0 0;
   text-align: center;
   font-size: 0.9em;
   color: #1F7972;
@@ -261,4 +261,34 @@ a.btn {
   color: #1F7972;
   font-size: 13px;
   word-wrap: break-word;
+}
+
+.due_date {
+  margin-left: -15px;
+  padding-bottom: 15px;
+}
+
+.assignee {
+  padding-left: 10px;
+}
+
+.assignee .select2-container--default .select2-selection--multiple {
+  background-color: rgba(250, 250, 250, 0.4);
+  border: none;
+}
+
+.select2-container {
+  line-height: 26px;
+}
+
+.avatar-todo {
+  border-radius: 12px;
+    box-sizing: border-box;
+    width: 20px;
+    height: 20px;
+}
+
+.todo-info {
+  text-align: center;
+  margin: 0.2em 0;
 }

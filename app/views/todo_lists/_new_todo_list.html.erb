@@ -1,7 +1,7 @@
 <h1 class="todo_title">New Todo List</h1>
 
 <div class="forms">
-  <%= form_for [@room, @todo_list], remote: true do |form| %>
+  <%= form_for [@room, @todo_list], remote: true do |f| %>
     <% if @todo_list.errors.any? %>
       <div id="error_explanation">
         <h2><%= pluralize(@todo_list.errors.count, "error") %> prohibited this todo_list from being saved:</h2>
@@ -15,23 +15,62 @@
     <% end %>
 
     <div class="field">
-      <%= form.hidden_field :user_room_id, value: @user_room.id %>
-      <%= form.hidden_field :room_id, value: @user_room.room_id %>
-      <%= form.label :title %>
-      <%= form.text_field :title, id: :todo_list_title, autocomplete: :off %>
+      <%= f.hidden_field :user_room_id, value: @user_room.id %>
+      <%= f.hidden_field :room_id, value: @user_room.room_id %>
+      <%= f.label :title %>
+      <%= f.text_field :title, id: :todo_list_title, autocomplete: :off %>
     </div>
 
     <div class="field">
-      <%= form.label :description %>
-      <%= form.text_area :description, id: :todo_list_description, autocomplete: :off %>
+      <%= f.label :description %>
+      <%= f.text_area :description, id: :todo_list_description, autocomplete: :off %>
     </div>
 
-    <div class="actions">
-      <%= form.submit %>
+    <div class="col-md-6 due_date" style="float: left">
+      <%= f.label :due_date, "Due" %>
+      <div id="datepicker1">
+        <%= f.text_field :due_date, class: "input-expected", value: @todo_list.due_date, autocomplete: :off %>
+      </div>
+    </div>
+
+    <div class="col-md-6 assignee" style="float: right; padding-left: 0">
+      <%= f.label :assignee_id, "To", style: "width: 100%" %>
+      <%= select_tag :assignee_id, options_for_select([current_user.name]), {id: :members_todo, multiple: :true, style: "width: 100%; line-height: 26px"} %>
+    </div>
+
+    <div class="actions" style="clear: both">
+      <%= f.submit %>
     </div>
   <% end %>
 </div>
 
 <div class="links">
-<%= link_to 'Back', room_todo_lists_path(@room), remote: true %>
+  <%= link_to 'Back', room_todo_lists_path(@room), remote: true %>
 </div>
+
+<script type="text/javascript">
+
+  $(function() {
+  var today = new Date();
+  $('#datepicker1').datepicker({
+    inputs: $('.input-expected'),
+    daysOfWeekDisabled: [0,6],
+    startDate: today,
+    todayHighlight: true,
+    format: "mm-dd-yyyy"
+  });
+  });
+
+
+  $(function(){
+    $("#members_todo").select2({
+      ajax: {
+        url: "/searches/room_members/<%="#{@room.id}"%>" + "#{@room.id}",
+        dataType: "json",
+        data: function (params) {return {search: params.term};},
+        processResults: function (data) {return {results: data};},
+        cache: true
+      },
+    })
+  });
+</script>
