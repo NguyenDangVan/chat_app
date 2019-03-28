@@ -29,13 +29,13 @@
     <div class="col-md-6 due_date" style="float: left">
       <%= f.label :due_date, "Due" %>
       <div id="datepicker1">
-        <%= f.text_field :due_date, class: "input-expected", value: @todo_list.due_date, autocomplete: :off %>
+        <%= f.text_field :due_date, class: "input-expected", value: (@todo_list.due_date.blank? ? '' : @todo_list.due_date.strftime("dd-mm-yyyy")), autocomplete: :off %>
       </div>
     </div>
 
     <div class="col-md-6 assignee" style="float: right; padding-left: 0">
       <%= f.label :assignee_id, "To", style: "width: 100%" %>
-      <%= select_tag :assignee_id, options_for_select([current_user.name]), {id: :members_todo, multiple: :true, style: "width: 100%; line-height: 26px"} %>
+      <%= select_tag "todo_list[user_ids][]", options_for_select([current_user.name]), {id: :members_todo, multiple: :true, style: "width: 100%; line-height: 26px"} %>
     </div>
 
     <div class="actions" style="clear: both">
@@ -57,7 +57,7 @@
     daysOfWeekDisabled: [0,6],
     startDate: today,
     todayHighlight: true,
-    format: "mm-dd-yyyy"
+    format: "dd-mm-yyyy"
   });
   });
 

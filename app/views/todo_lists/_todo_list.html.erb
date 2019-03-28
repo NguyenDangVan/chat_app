@@ -3,8 +3,13 @@
     <h2 class="todo_title"><%= link_to todo_list.title, room_todo_list_path(id: todo_list.id), remote: true %></h2>
     <p class="todo_sub_title"><%= todo_list.description %></p>
     <div class="todo-info">
-    <%= image_tag("avatars/nguyen_dang_van.jpg", data: {toogle: "tooltip", placement: "top"}, alt: "avatar", class: "avatar-todo", title: "Janette") %>
-    <% if todo_list.due_date < Time.now %>
+    <% todo_list.user_ids.each do |i| %>
+      <%=
+        user = User.find(i)
+        image_tag(user.avatar, class: "avatar-todo", title: user.name)
+      %>
+    <% end %>
+    <% if todo_list.due_date <= Date.today %>
       <span style="color: red">Due: <%= todo_list.due_date.strftime("%m/%d/%Y") %><span>
     <% else %>
       <span style="color: #1F7972">Due: <%= todo_list.due_date.strftime("%m/%d/%Y") %></span>
