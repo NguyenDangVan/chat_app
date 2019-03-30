@@ -21,7 +21,9 @@ class TodoListsController < ApplicationController
 
   def create
     @todo_lists = TodoList.all
+    assignee_ids = params[:todo_list][:user_ids]
     @todo_list = TodoList.create! todo_list_params
+    assignee_ids.map {|id| TodoListsUser.create user_id: id, todo_list_id: @todo_list.id}
     if @todo_list.save
       format_js
     end
@@ -63,6 +65,6 @@ class TodoListsController < ApplicationController
   end
 
   def todo_list_params
-    params.require(:todo_list).permit :title, :description, :user_room_id, :room_id, :assignee_id, :due_date
+    params.require(:todo_list).permit :title, :description, :user_room_id, :room_id, :due_date
   end
 end
