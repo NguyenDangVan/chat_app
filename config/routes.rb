@@ -14,6 +14,9 @@ Rails.application.routes.draw do
   resources :rooms do
     resources :user_rooms, only: :destroy
     resources :todo_lists do
+      member do
+        patch :complete
+      end
       resources :todo_items do
         member do
           patch :complete

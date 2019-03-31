@@ -1,5 +1,5 @@
 class TodoListsController < ApplicationController
-  before_action :set_todo_list, only: [:edit, :update, :destroy]
+  before_action :set_todo_list, only: [:edit, :update, :destroy, :complete]
   before_action :set_room
 
   def show
@@ -47,6 +47,13 @@ class TodoListsController < ApplicationController
     if @todo_list.destroy
       format_js
     end
+  end
+
+  def complete
+    binding.pry
+    @todo_lists = TodoList.all
+
+    @todo_list.update_attributes completed_at: Date.today
   end
 
   private

@@ -1,2 +1,7 @@
 $('#startnewChat').modal('toggle');
-location.reload();
+<% [:notice, :error, :alert, :success, :danger].each do |level| %>
+  <% if flash[level].present? %>
+    notify('<%= flash[level] %>', 'level.to_s');
+  <% end %>
+<% end %>
+// location.reload();

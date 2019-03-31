@@ -16,5 +16,8 @@
 			<%= link_to 'Delete', room_todo_list_path(@room, @todo_list), method: :delete,
 				data: { confirm: "Are you sure?" }, remote: true %> |
 			<%= link_to 'Back', room_todo_lists_path(@room), remote: true %>
+			<%= link_to complete_room_todo_list_path(@room, @todo_list), method: :patch, style: "float: right; color: #0f95ff", remote: true do %>
+				<i class="fa fa-check"></i>DONE
+			<% end %>
 		</div>
 </div>
