@@ -29,10 +29,10 @@ class RoomsController < ApplicationController
       flash[:danger] = "Create group failed"
     end
 
-    redirect_to user_rooms_path
-    # respond_to do |format|
-    #   format.js
-    # end
+    # redirect_to user_rooms_path
+    respond_to do |format|
+      format.js
+    end
   end
 
   def edit

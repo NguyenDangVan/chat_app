@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190328093830) do
+ActiveRecord::Schema.define(version: 20190330095126) do
 
   create_table "message_rooms", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "content"
@@ -66,6 +66,7 @@ ActiveRecord::Schema.define(version: 20190328093830) do
     t.datetime "updated_at",                 null: false
     t.integer  "assignee_ids"
     t.date     "due_date"
+    t.date     "completed_at"
     t.index ["room_id"], name: "index_todo_lists_on_room_id", using: :btree
     t.index ["user_room_id"], name: "index_todo_lists_on_user_room_id", using: :btree
   end

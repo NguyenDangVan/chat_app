@@ -38,7 +38,7 @@
       <%= select_tag "todo_list[user_ids][]", options_for_select([current_user.name]), {id: :members_todo, multiple: :true, style: "width: 100%; line-height: 26px"} %>
     </div>
 
-    <div class="actions" style="clear: both">
+    <div class="actions" style="clear: both; text-align: center;">
       <%= f.submit %>
     </div>
   <% end %>

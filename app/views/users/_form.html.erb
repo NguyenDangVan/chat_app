@@ -1,7 +1,8 @@
 <div class="profile" style="text-align: center">
-  <%= image_tag("avatars/avatar-male-1.jpg", class: "avatar-xl", alt: "avatar") %>
+  <%= image_tag(@user.avatar, class: "avatar-xl", alt: "avatar") %>
   <h1 style="color: black"><%= @user.name %></h1>
   <span style="color: white"><%= @user.address %></span>
+  <span><%= @add %></span>
   <div class="content" >
     <div class="stats" id="form_friend">
       <%= render "form_friend" if logged_in? %>

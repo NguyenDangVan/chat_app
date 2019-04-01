@@ -3,6 +3,7 @@ class UsersController < ApplicationController
   # before_action :correct_user, only: [:update, :edit]
 
   def show
+    @add = get_ip()
     respond_to do |format|
       format.js
     end
