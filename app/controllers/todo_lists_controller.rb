@@ -50,7 +50,6 @@ class TodoListsController < ApplicationController
   end
 
   def complete
-    binding.pry
     @todo_lists = TodoList.all
 
     @todo_list.update_attributes completed_at: Date.today

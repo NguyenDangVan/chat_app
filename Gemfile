@@ -16,6 +16,7 @@ gem "bootsnap", ">= 1.1.0", require: false
 gem 'bootstrap4-kaminari-views'
 gem "bootstrap-sass", "3.3.7"
 gem "pry"
+gem "pnotify-rails"
 gem "carrierwave"
 gem "coffee-rails", "~> 4.2"
 gem "ffaker"
