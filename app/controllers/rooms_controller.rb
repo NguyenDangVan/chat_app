@@ -19,14 +19,15 @@ class RoomsController < ApplicationController
 
   def create
     @room = current_user.rooms.create room_params
-    params[:members].each {|a| UserRoom.create user_id: a, room_id: @room.id}
+    if params[:members]
+      params[:members].each {|a| UserRoom.create user_id: a, room_id: @room.id}
+    end
     @room.owner_id = current_user.id
     @messages = @room.message_rooms
     if @room.save
-      flash[:success] = "Create group successfully"
-
+      flash.now[:success] = "Create group successfully"
     else
-      flash[:danger] = "Create group failed"
+      flash.now[:danger] = "Create group failed"
     end
 
     # redirect_to user_rooms_path
