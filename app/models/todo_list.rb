@@ -11,6 +11,7 @@ class TodoList < ApplicationRecord
   end
 
   def complete_all?
-
+    todo_items = self.todo_items.where(completed_at: nil)
+    todo_items.blank?
   end
 end

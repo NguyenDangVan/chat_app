@@ -1,9 +1,9 @@
 /*
+ *= require pnotify
  *= require select2
  *= require bootstrap-datepicker
  *= require datetimepicker
  *= require bootstrap.min
- *= require pnotify
  *= require swipe.min
  *= require custom
  */
