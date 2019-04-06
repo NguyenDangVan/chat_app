@@ -15,6 +15,7 @@ class MessagesController < ApplicationController
           user_id: current_user.id,
           recipient_id: a}
       redirect_to user_messages_path(current_user.id)
+      flash.now[:success] = "send message successfully"
     else
       @message = current_user.messages.create message_params
     end

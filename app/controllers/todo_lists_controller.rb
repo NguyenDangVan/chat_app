@@ -1,14 +1,13 @@
 class TodoListsController < ApplicationController
   before_action :set_todo_list, only: [:edit, :update, :destroy, :complete]
-  before_action :set_room
+  before_action :set_room, :set_todo_lists
+  before_action :set_todo_lists, only: [:index, :create, :update, :destroy, :complete]
 
   def show
     @todo_list = TodoList.find params[:id]
   end
 
   def index
-    @todo_lists = TodoList.all
-
     format_js
   end
 
@@ -20,7 +19,6 @@ class TodoListsController < ApplicationController
   end
 
   def create
-    @todo_lists = TodoList.all
     assignee_ids = params[:todo_list][:user_ids]
     @todo_list = TodoList.create! todo_list_params
     assignee_ids.map {|id| TodoListsUser.create user_id: id, todo_list_id: @todo_list.id}
@@ -35,23 +33,18 @@ class TodoListsController < ApplicationController
   end
 
   def update
-    @todo_lists = TodoList.all
     @todo_list.update todo_list_params
 
     format_js
   end
 
   def destroy
-    @todo_lists = TodoList.all
-
     if @todo_list.destroy
       format_js
     end
   end
 
   def complete
-    @todo_lists = TodoList.all
-
     @todo_list.update_attributes completed_at: Date.today
   end
 
@@ -64,6 +57,10 @@ class TodoListsController < ApplicationController
 
   def set_todo_list
     @todo_list = TodoList.find params[:id]
+  end
+
+  def set_todo_lists
+    @todo_lists = @room.todo_lists
   end
 
   def set_room

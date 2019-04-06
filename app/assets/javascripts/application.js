@@ -18,6 +18,16 @@ function notify(text, type) {
 		type: type,
 		width: '300px',
 		min_height: '10px',
-		delay: 20000
+		delay: 2000
 	});
+}
+
+function notify_for_task(text, type) {
+  new PNotify({
+    text: text,
+    type: type,
+    width: '300px',
+    min_height: '10px',
+    delay: 4000
+  });
 }
