@@ -24,6 +24,7 @@
             <h1>Groups</h1>
             <div class="list-group" id="chats" role="tablist">
               <%= render partial: "rooms/groups_of_user", locals: {rooms: @groups_of_user} %>
+              <%= render partial: "rooms/list_groups", locals: {rooms: @rooms} %>
             </div>
           </div>
         </div>

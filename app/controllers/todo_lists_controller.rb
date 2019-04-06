@@ -3,6 +3,7 @@ class TodoListsController < ApplicationController
   before_action :set_room, :set_todo_lists
   before_action :set_todo_lists, only: [:index, :create, :update, :destroy, :complete]
 
+
   def show
     @todo_list = TodoList.find params[:id]
   end
@@ -45,7 +46,12 @@ class TodoListsController < ApplicationController
   end
 
   def complete
-    @todo_list.update_attributes completed_at: Date.today
+    if @todo_list.complete_all?
+      @todo_list.update_attributes completed_at: Date.today
+      flash.now[:success] = "Completed tasks"
+    else
+      flash.now[:danger] = "Your tasks not completed yet"
+    end
   end
 
   private
@@ -69,5 +75,9 @@ class TodoListsController < ApplicationController
 
   def todo_list_params
     params.require(:todo_list).permit :title, :description, :user_room_id, :room_id, :due_date
+  end
+
+  def complete_task
+
   end
 end

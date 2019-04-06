@@ -1,9 +1,9 @@
 //= require jquery
+//= require pnotify
 //= require select2
 //= require bootstrap-datepicker/core
 //= require datetimepicker
 //= require custom
-//= require pnotify
 //= require jquery_ujs
 //= require popper.min
 //= require swipe.min
