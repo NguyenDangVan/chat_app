@@ -15,7 +15,8 @@ class ApplicationController < ActionController::Base
   end
 
   def get_ip
-    request.remote_addr
+    return "118.70.13.100" if request.remote_ip = "127.0.0.1"
+    request.remote_ip
   end
 
   def cookie_set

@@ -3,7 +3,6 @@ class RoomsController < ApplicationController
   before_action :set_room, only: [:show, :edit, :destroy, :update]
   before_action :set_user_room, only: :show
 
-
   def new
     @room = Room.new
 
@@ -37,6 +36,11 @@ class RoomsController < ApplicationController
   end
 
   def edit
+    if current_user.id = @room.owner_id
+      user_agent = request.user_agent
+      @address = Geocoder.search(get_ip()).first.city
+      @country = Geocoder.search(get_ip()).first.country
+    end
     if params[:user_id]
       @users_room = @room.users
     end
