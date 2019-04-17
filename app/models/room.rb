@@ -9,4 +9,8 @@ class Room < ApplicationRecord
   validates :name, presence: true, length: {maximum: 50}
   validates :description, presence: true, length: {maximum: 255}
 
+  def owner?
+    return if self.owner_id = current_user.id
+  end
+
 end

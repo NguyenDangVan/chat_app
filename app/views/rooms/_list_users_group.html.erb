@@ -14,7 +14,7 @@
     <tbody>
       <% @users_room.each do |user| %>
         <tr>
-          <td><%= user.name %></td>
+          <td title="<%= @address %>, <%= @country %>"><%= user.name %></td>
           <td><%= user.email %></td>
           <td>
             <% if user.id == @room.owner_id %>

@@ -18,6 +18,8 @@ gem "bootstrap-sass", "3.3.7"
 gem "pry"
 gem "pnotify-rails"
 gem "carrierwave"
+gem 'geocoder'
+gem 'geoip-rails'
 gem "coffee-rails", "~> 4.2"
 gem "ffaker"
 gem "figaro"
