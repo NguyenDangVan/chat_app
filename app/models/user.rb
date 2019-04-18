@@ -10,6 +10,7 @@ class User < ApplicationRecord
   has_many :friends, -> {where(relationships: {status_request: 1})}, through: :relationships, source: :friend
   has_many :blocks, -> {where(relationships: {status_request: 2})}, through: :relationships, source: :friend
   has_many :pendings, -> {where(relationships: {status_request: 0})}, through: :request_relationships, source: :user
+  has_many :out_goings, -> {where(relationships: {status_request: 0})}, through: :relationships, source: :friend
 
   mount_uploader :avatar, AvatarUploader
 
@@ -25,7 +26,7 @@ class User < ApplicationRecord
   scope :select_by, -> {select :id, :name, :email}
 
   def list_friends
-    Relationship.where("(user_id = ? OR friend_id = ?) AND status_request = 0", self.id, self.id)
+    Relationship.where("(user_id = ? OR friend_id = ?) AND status_request = 1", self.id, self.id)
   end
 
   def User.digest(string)
@@ -44,8 +45,16 @@ class User < ApplicationRecord
     friends.delete user
   end
 
+  def in_coming
+    Relationship.where(friend_id: self.id)
+  end
+
+  def out_coming
+    Relationship.where send_id: self.id
+  end
+
   def is_pending? other_user
-    pendings.pluck(:id).include?(other_user.id)
+    out_goings.pluck(:id).include?(other_user.id)
   end
 
   def is_friend? other_user

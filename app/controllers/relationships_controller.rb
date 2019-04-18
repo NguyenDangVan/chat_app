@@ -20,10 +20,10 @@ class RelationshipsController < ApplicationController
       @request = @relationship.update_attributes status_request: "Blocked"
     else
       if @status_request
-        @user = User.find_by id: params[:relationship][:friend_id]
+        @user = User.find_by id: params[:relationship][:user_id]
         @status = "Blocked"
       else
-        @user = User.find_by id: params[:relationship][:friend_id]
+        @user = User.find_by id: params[:relationship][:user_id]
         @status = "Pending"
       end
       @request = current_user.relationships.create! friend_id: @user.id, status_request: @status
@@ -44,11 +44,11 @@ class RelationshipsController < ApplicationController
     if params[:user_id]
       @user_id = params[:user_id]
       @relationship.destroy
-      flash[:danger] = "Delete successfully"
+      flash.now[:danger] = "Delete successfully"
     else
-      @user = Relationship.find_by(id: params[:relationship][:friend_id]).friend
+      @user = Relationship.find(params[:id]).friend
       current_user.un_friend @user
-      flash[:danger] = "Delete friend successfully"
+      flash.now[:danger] = "Delete friend successfully"
     end
 
     respond_to do |format|
@@ -71,7 +71,8 @@ class RelationshipsController < ApplicationController
 
   def index
     @users = current_user.list_friends_of_current_user
-    @out_goings = current_user.pendings.page(params[:page]).per 4
+    @in_coming = current_user.pendings.page(params[:page]).per 4
+    @out_goings = current_user.out_goings.page(params[:page]).per 4
     @q = User.search params[:q]
     @user = @q.result distinct: true
   end

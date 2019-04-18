@@ -1,9 +1,9 @@
 <% if current_user.blocked? @user %>
-  <%= render "un_block" %>
+  <%= render "users/un_block" %>
 <% else %>
   <div class="item">
     <%= form_for current_user.relationships.build, method: :post, remote: true do |f| %>
-      <%= f.hidden_field :friend_id, value: @user.id %>
+      <%= f.hidden_field :user_id, value: @user.id %>
       <%= f.hidden_field :status_request, value: "Block" %>
       <%= f.submit "Block", class: "btn button" %>
     <% end %>
