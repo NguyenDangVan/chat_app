@@ -2,12 +2,12 @@
   <%= render "users/block" %>
 <% else %>
   <% if current_user.is_pending? @user %>
-    <%= render "close" %>
+    <%= render "users/close" %>
   <% else %>
     <% if current_user.is_friend? @user %>
-      <%= render "un_friend" %>
+      <%= render "users/un_friend" %>
     <% else %>
-      <%= render "add_friend" %>
+      <%= render "users/add_friend" %>
     <% end %>
   <% end %>
 <% end %>

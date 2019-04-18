@@ -1,6 +1,10 @@
-<div class="item">
-  <%= form_for current_user.relationships.find_by(friend_id: @user.id), method: :delete, remote: true do |f| %>
-    <%= f.hidden_field :status_request, value: "Block" %>
-    <%= f.submit "Unblock", class: "btn button" %>
-  <% end %>
-</div>
+<% if current_user.blocked? @user %>
+  <div class="item">
+    <%= form_for current_user.relationships.find_by(friend_id: @user.id), method: :delete, remote: true do |f| %>
+      <%= f.hidden_field :status_request, value: "Block" %>
+      <%= f.submit "Unblock", class: "btn button" %>
+    <% end %>
+  </div>
+<% else %>
+  <%= render "users/block" %>
+<% end %>
