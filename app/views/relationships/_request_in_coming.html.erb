@@ -5,7 +5,7 @@
         <h4 style="line-height: 100px; margin-left: 10px;">List friend request</h4>
       </div>
       <div class="">
-        <% @out_goings.each do |user| %>
+        <% @in_coming.each do |user| %>
           <div style="width: 100%; overflow: hidden;">
             <div style="margin-top: 20px; height: 150px">
               <div class="item-content">
@@ -16,8 +16,9 @@
                   <div class="title request"><%= user.name %></div>
                 <% end %>
                 <div class="action">
+                  <%= relationship = Relationship.find_by friend_id: user.id, user_id: current_user.id, status_request: 0 %>
                   <div class="fr-button col-md-6 col-xl-12">
-                    <%= link_to user_relationship_path(current_user.id, Relationship.find_by(user_id: current_user.id, friend_id: user.id, status_request: 0)), title: "Close",class: "btn btn-danger btn-xs", id: "delete-requests", method: :delete, data: {confirm: "Are you sure?"}, remote: true do %>
+                    <%= link_to user_relationship_path(current_user.id, relationship)), title: "Close",class: "btn btn-danger btn-xs", id: "delete-requests", method: :delete, data: {confirm: "Are you sure?"}, remote: true do %>
                     <i class="fa fa-trash"></i>
                     <% end %>
                     <%#= link_to relationship_path(id: Relationship.find_by(user_id: current_user.id, friend_id: user.id, status_request: 0).id), title: "Accept", class: "btn btn-primary btn-xs", id: "accept-requests", method: :patch, remote: true do %>

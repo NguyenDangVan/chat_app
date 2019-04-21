@@ -40,7 +40,8 @@ class RelationshipsController < ApplicationController
 
   def destroy
     @relationship = Relationship.find_by(id: params[:id])
-    @out_goings = current_user.pendings.page(params[:page]).per 4
+    @in_coming = current_user.pendings.page(params[:page]).per 4
+    @out_goings = current_user.out_goings.page(params[:page]).per 4
     if params[:user_id]
       @user_id = params[:user_id]
       @relationship.destroy
