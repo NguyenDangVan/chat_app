@@ -4,26 +4,26 @@
       <div class="nav nav-tab menu">
 
         <%= link_to edit_user_path(current_user.id), data: {toggle: "modal", target: "#startnewchat"}, class: " btn", remote: true do %>
-          <%= image_tag(current_user.avatar, alt: "avatar", class: "avatar-xl") %>
+          <%= image_tag(current_user.avatar,title: current_user.name, alt: "avatar", class: "avatar-xl") %>
         <% end %>
 
-        <%= link_to user_relationships_path(current_user.id) do %>
+        <%= link_to user_relationships_path(current_user.id), title: "Friends" do %>
           <i class="material-icons">account_circle</i>
         <% end %>
 
-        <%= link_to user_messages_path(current_user.id), class: "active" do %>
+        <%= link_to user_messages_path(current_user.id), title: "Messages", class: "active" do %>
           <i class="material-icons">chat_bubble_outline</i>
         <% end %>
 
-        <%= link_to user_rooms_path(current_user.id), class: "f-grow1" do %>
+        <%= link_to user_rooms_path(current_user.id), title: "Groups", class: "f-grow1" do %>
           <i class="material-icons">group</i>
         <% end %>
 
-        <%= link_to edit_user_path(current_user.id), class: "show" do %>
+        <%= link_to edit_user_path(current_user.id), title: "Settings", class: "show" do %>
           <i class="material-icons">settings</i>
         <% end %>
 
-        <%= link_to logout_path, method: :delete, class: "btn power" do %>
+        <%= link_to logout_path, method: :delete, title: "Log out", class: "btn power" do %>
           <i class="material-icons">power_settings_new</i>
         <% end %>
 

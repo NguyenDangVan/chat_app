@@ -20,6 +20,6 @@ class MessageBroadcastJob < ApplicationJob
     # MessagesController.render partial: 'messages/message', locals: {message: message}
     # renderer = ApplicationController.renderer.new(method: 'get', https: true)
     #ApplicationController.renderer.render(partial: 'messages/message', locals: { message: message })
-    MessagesController.render partial: 'messages/message_job', locals: {message: message}
+    MessagesController.render partial: 'messages/message_job', locals: {message: message, current_user: User.find(message.user_id)}
   end
 end

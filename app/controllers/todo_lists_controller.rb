@@ -13,7 +13,7 @@ class TodoListsController < ApplicationController
   end
 
   def new
-    @user_room = UserRoom.find_by user_id: current_user.id, room_id: 2
+    @user_room = UserRoom.find_by user_id: current_user.id, room_id: params[:room_id]
     @todo_list = TodoList.new
 
     format_js
