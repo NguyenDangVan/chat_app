@@ -37,7 +37,7 @@
         <hr>
       </div>
         <div id="messages_private" data-recipient_id="<%= @user.id %>" data-sender_id="<%= current_user.id %>">
-          <% if !@messages.empty? %>
+          <% if @message.present? %>
             <% messages.each do |message| %>
               <%= render "messages/message", message: message %>
             <% end %>
