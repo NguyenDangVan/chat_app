@@ -1,25 +1,111 @@
-<% @todo_lists.each do |todo_list| %>
-  <% if !todo_list.complete? %>
-    <div class="row-todo">
-      <h2 class="todo_title"><%= link_to todo_list.title, room_todo_list_path(id: todo_list.id), remote: true %></h2>
-      <p class="todo_sub_title"><%= todo_list.description %></p>
-      <div class="todo-info">
-      <% todo_list.user_ids.each do |i| %>
-        <%=
-          user = User.find(i)
-          image_tag(user.avatar, class: "avatar-todo", title: user.name)
-        %>
-      <% end %>
-      <% if todo_list.due_date <= Date.today %>
-        <span style="color: red">Due: <%= todo_list.due_date.strftime("%m/%d/%Y") %><span>
-      <% else %>
-        <span style="color: #1F7972">Due: <%= todo_list.due_date.strftime("%m/%d/%Y") %></span>
-      <% end %>
-      </div>
-    </div>
-  <% end %>
-<% end %>
-
-<div class="links">
-  <%= link_to "New Todo List", new_room_todo_list_path(@room), remote: true %>
+<div class="row-todo task_title">
+  <ul style="list-style: none" class="nav nav-tabs" id="myTab">
+    <li class="menu_todo tasks active">
+      <a href="#all_tasks">Tasks</a>
+    </li>
+    <li class="menu_todo task_assign">
+      <a href="#tasks_assigned">Tasks assigned</a>
+    </li>
+    <li class="menu_todo task_complete">
+      <a href="#tasks_completed">Tasks completed</a>
+    </li>
+  </ul>
 </div>
+<div class="tab-content">
+  <div class="tab-pane active tasks_scroll" id="all_tasks">
+    <% @todo_lists.each do |todo_list| %>
+      <% unless todo_list.complete? %>
+        <div class="row-todo">
+          <h2 class="todo_title"><%= link_to todo_list.title, room_todo_list_path(id: todo_list.id), remote: true %></h2>
+          <p class="todo_sub_title"><%= todo_list.description %></p>
+          <div class="todo-info">
+          <% todo_list.user_ids.each do |i| %>
+            <%=
+              user = User.find(i)
+              image_tag(user.avatar, class: "avatar-todo", title: user.name)
+            %>
+          <% end %>
+          <% if todo_list.due_date <= Date.today %>
+            <span style="color: red">Due: <%= todo_list.due_date.strftime("%m/%d/%Y") %><span>
+          <% else %>
+            <span style="color: #1F7972">Due: <%= todo_list.due_date.strftime("%m/%d/%Y") %></span>
+          <% end %>
+          </div>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
+
+  <div class="tab-pane tasks_scroll" id="tasks_assigned">
+    <% @tasks_assigned.each do |todo_list| %>
+      <% unless todo_list.complete? %>
+        <div class="row-todo">
+          <h2 class="todo_title"><%= link_to todo_list.title, room_todo_list_path(id: todo_list.id), remote: true %></h2>
+          <p class="todo_sub_title"><%= todo_list.description %></p>
+          <div class="todo-info">
+          <% todo_list.user_ids.each do |i| %>
+            <%=
+              user = User.find(i)
+              image_tag(user.avatar, class: "avatar-todo", title: user.name)
+            %>
+          <% end %>
+          <% if todo_list.due_date <= Date.today %>
+            <span style="color: red">Due: <%= todo_list.due_date.strftime("%m/%d/%Y") %><span>
+          <% else %>
+            <span style="color: #1F7972">Due: <%= todo_list.due_date.strftime("%m/%d/%Y") %></span>
+          <% end %>
+          </div>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
+
+  <div class="tab-pane tasks_scroll" id="tasks_completed">
+    <% @tasks_completed.each do |todo_list| %>
+      <div class="row-todo">
+        <h2 class="todo_title"><%= link_to todo_list.title, room_todo_list_path(id: todo_list.id), remote: true %></h2>
+        <p class="todo_sub_title"><%= todo_list.description %></p>
+        <div class="todo-info">
+        <% todo_list.user_ids.each do |i| %>
+          <%=
+            user = User.find(i)
+            image_tag(user.avatar, class: "avatar-todo", title: user.name)
+          %>
+        <% end %>
+        <% if todo_list.due_date <= Date.today %>
+          <span style="color: red">Due: <%= todo_list.due_date.strftime("%m/%d/%Y") %><span>
+        <% else %>
+          <span style="color: #1F7972">Due: <%= todo_list.due_date.strftime("%m/%d/%Y") %></span>
+        <% end %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+  <div class="links">
+      <%= link_to "New Todo List", new_room_todo_list_path(@room), remote: true %>
+    </div>
+</div>
+
+<style>
+  .task_title {
+    background-color: #64c7be;
+    border-radius: 6px 6px 0 0;
+  }
+</style>
+
+<script type="text/javascript">
+  $('#myTab a').click(function(e) {
+  e.preventDefault();
+  $(this).tab('show');
+});
+
+// store the currently selected tab in the hash value
+$("ul.nav-tabs > li > a").on("shown.bs.tab", function(e) {
+  var id = $(e.target).attr("href").substr(1);
+  window.location.hash = id;
+});
+
+// on load of the page: switch to the currently selected tab
+var hash = window.location.hash;
+$('#myTab a[href="' + hash + '"]').tab('show');
+</script>

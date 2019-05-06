@@ -12,5 +12,4 @@ class Room < ApplicationRecord
   def owner?
     return if self.owner_id = current_user.id
   end
-
 end

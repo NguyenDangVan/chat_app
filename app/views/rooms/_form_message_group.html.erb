@@ -12,9 +12,16 @@
           <h5><%= link_to @room.name, edit_user_room_path(current_user.id, @room.id), data: {toggle: "modal", target: "#startnewchat"}, remote: true %></h5>
           <span>Active now</span>
         </div>
-        <button class="btn connect d-md-block d-none" name="1"><i class="material-icons md-30">phone_in_talk</i></button>
+        <%= link_to room_todo_lists_path(@room), title: "Tasks", class: "btn d-md-block d-none", data: {toggle: "modal", target: "#startnewchat"}, remote: true do %>
+          <i class="material-icons md-30">assignment_turned_in</i>
+        <% end %>
         <button class="btn connect d-md-block d-none" name="1"><i class="material-icons md-36">videocam</i></button>
-        <%= link_to room_todo_lists_path(@room), class: "btn d-md-block d-none", data: {toggle: "modal", target: "#startnewchat"}, remote: true do %>
+        <% if @tasks_assigned.any? %>
+          <div class="noti_todo">
+            <span><%= @tasks_assigned.count %></span>
+          </div>
+        <% end %>
+        <%= link_to room_todo_lists_path(@room), title: "Info", class: "btn d-md-block d-none", data: {toggle: "modal", target: "#startnewchat"}, remote: true do %>
           <i class="material-icons md-30">info</i>
         <% end %>
         <div class="dropdown">
@@ -96,3 +103,27 @@
     </div>
   </div>
 </div>
+
+<style>
+  .noti_todo {
+    position: absolute;
+    background: deeppink;
+    /* left: 0; */
+    right: 196px;
+    width: 16px;
+    height: 16px;
+    /* top: 20px; */
+    bottom: 29px;
+    border-radius: 100%;
+    /* text-align: center; */
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    /*border: 1px solid #fff;*/
+  }
+  .noti_todo span {
+    font-size: 10px;
+    line-height: 0px;
+    color: #fff !important
+  }
+</style>

@@ -66,6 +66,8 @@ class TodoListsController < ApplicationController
   end
 
   def set_todo_lists
+    @tasks_completed = @room.todo_lists.where.not(completed_at: nil)
+    @tasks_assigned = @room.todo_lists.task_assigne current_user
     @todo_lists = @room.todo_lists
   end
 

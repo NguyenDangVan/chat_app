@@ -182,10 +182,11 @@ a.btn {
 
 .links {
   display: block;
-  margin: 1.5em auto 0 auto;
+  margin: 0.5em auto 0 auto;
   text-align: center;
   font-size: 0.8em;
   color: white;
+  padding-bottom: 8px;
 }
 
 .row-todo {
@@ -270,6 +271,7 @@ a.btn {
 
 .assignee {
   padding-left: 10px;
+  margin-bottom: 10px;
 }
 
 .assignee .select2-container--default .select2-selection--multiple {
@@ -291,4 +293,39 @@ a.btn {
 .todo-info {
   text-align: center;
   margin: 0.2em 0;
+}
+
+.menu_todo {
+  /*text-transform: uppercase;*/
+  color: black;
+  font-size: 16px;
+  float: left;
+  padding: 10px;
+}
+.menu_todo:hover {
+  background-color: lightblue;
+  cursor: pointer;
+}
+
+.tasks {
+  width: 20%;
+  padding-left: 20px;
+}
+
+.task_assign {
+  width: 40%;
+  padding-left: 34px;
+}
+
+.task_complete {
+  width: 40%;
+  padding-left: 23px;
+}
+
+.nav-tabs {
+  border-bottom: none !important
+}
+
+.tasks_scroll {
+  overflow:auto; height:360px; margin-bottom: 0px
 }

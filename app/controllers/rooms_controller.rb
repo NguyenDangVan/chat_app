@@ -14,6 +14,7 @@ class RoomsController < ApplicationController
   def show
     @messages = @room.message_rooms
     @message = MessageRoom.new
+    @tasks_assigned = @room.todo_lists.task_assigne current_user
   end
 
   def create

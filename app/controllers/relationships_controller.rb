@@ -39,7 +39,7 @@ class RelationshipsController < ApplicationController
   end
 
   def destroy
-    @relationship = Relationship.find_by(id: params[:id])
+    @relationship = Relationship.find(params[:id])
     @in_coming = current_user.pendings.page(params[:page]).per 4
     @out_goings = current_user.out_goings.page(params[:page]).per 4
     if params[:user_id]
@@ -47,8 +47,9 @@ class RelationshipsController < ApplicationController
       @relationship.destroy
       flash.now[:danger] = "Delete successfully"
     else
-      @user = Relationship.find(params[:id]).friend
-      current_user.un_friend @user
+      user = @relationship.friend
+      user = User.find @relationship.user_id if user.id == current_user.id
+      current_user.un_friend user
       flash.now[:danger] = "Delete friend successfully"
     end
 
@@ -61,8 +62,8 @@ class RelationshipsController < ApplicationController
   end
 
   def update
-    @pending = Relationship.find_by id: params[:id]
-    if @pending.update_attributes status_request: 1
+    relationship = Relationship.find params[:id]
+    if relationship.update_attributes status_request: 1
       flash[:success] = "Accept successfully"
     else
       flash[:danger] = "Accept failed"
